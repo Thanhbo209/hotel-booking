@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     maxlength: 500,
   },
-  phone: { type: String, sparse: true },
+  phone: { type: String },
   avatarURL: String,
   avatarId: String,
 });
