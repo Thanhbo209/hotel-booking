@@ -6,11 +6,13 @@ import Link from "next/link";
 
 const RegisterForm = () => {
   return (
-    <section className="grid grid-cols-2 rounded-xl">
+    <section className="grid grid-cols-1 md:grid-cols-2 rounded-xl">
       <div className=" flex flex-col p-8 text-center">
-        <img
-          src="https://crystalpng.com/wp-content/uploads/2025/01/pc-pearl-continental-logo.png"
-          alt=""
+        <Image
+          src="/logo.png"
+          alt="HotelHub logo"
+          width={300}
+          height={300}
           className="w-25 h-25 object-cover mx-auto"
         />
         <h2>Create Account On HotelHub</h2>
@@ -34,7 +36,7 @@ const RegisterForm = () => {
           </Field>
           <Field>
             <FieldLabel>Password</FieldLabel>
-            <Input placeholder="••••••••" />
+            <Input placeholder="••••••••" type="password" />
           </Field>
         </div>
 
@@ -51,7 +53,7 @@ const RegisterForm = () => {
           </Link>
         </div>
       </div>
-      <div className="bg-muted flex justify-center border border-border items-center">
+      <div className="bg-muted flex justify-center border max-md:hidden border-border items-center">
         <Image
           src="/hotel-3d.png"
           alt=""
