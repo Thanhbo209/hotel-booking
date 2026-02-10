@@ -14,7 +14,7 @@ export const useRegister = () => {
       setSuccess(null);
       const res = await signUp(data);
       setSuccess(res.message || "Account created successfully");
-      router.push("/login");
+      setTimeout(() => router.push("/login"), 1500);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Register failed";
       setError(message);
