@@ -10,7 +10,7 @@ export const useLogin = () => {
     try {
       setError(null);
       await signIn(data);
-      // TODO: redirect to dashboard or show success toast
+      setAccessToken(result.accessToken);
       router.push("/");
       router.refresh(); // để SSR layout load user
     } catch (err: unknown) {

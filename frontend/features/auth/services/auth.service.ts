@@ -4,6 +4,9 @@ import {
 } from "@/features/auth/schemas/auth-schema";
 
 const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+if (!API_URL) {
+  throw new Error("NEXT_PUBLIC_BACKEND_URL is not configured");
+}
 
 export const signUp = async (payload: RegisterFormValues) => {
   const res = await fetch(`${API_URL}/auth/signUp`, {
