@@ -77,7 +77,7 @@ export const signIn = async (req, res) => {
     await Session.create({
       userId: user._id,
       refreshToken,
-      expiredsAt: new Date(Date.now() + REFREST_TOKEN_TTL),
+      expiresAt: new Date(Date.now() + REFREST_TOKEN_TTL),
     });
 
     res.cookie("refreshToken", refreshToken, {
