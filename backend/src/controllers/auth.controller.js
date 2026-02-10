@@ -6,7 +6,6 @@ import crypto from "node:crypto";
 
 const ACCESS_TOKEN_TTL = 30 * 60 * 1000;
 const REFREST_TOKEN_TTL = 14 * 24 * 60 * 60 * 1000; // 14 DAYS
-
 export const signUp = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
@@ -74,20 +73,22 @@ export const signIn = async (req, res) => {
       expiresAt: new Date(Date.now() + REFREST_TOKEN_TTL),
     });
 
-    // 🍪 ACCESS TOKEN COOKIE
+    const isProd = process.env.NODE_ENV === "production";
+
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: true, // true khi deploy https
+      secure: isProd,
       sameSite: "lax",
       maxAge: ACCESS_TOKEN_TTL,
+      path: "/",
     });
 
-    // 🍪 REFRESH TOKEN COOKIE
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: isProd,
       sameSite: "lax",
       maxAge: REFREST_TOKEN_TTL,
+      path: "/",
     });
 
     return res.status(200).json({
@@ -101,15 +102,25 @@ export const signIn = async (req, res) => {
 
 export const signOut = async (req, res) => {
   try {
-    const token = req.cookies?.refreshToken;
-    if (token) {
-      await Session.deleteOne({ refreshToken: token });
-      res.clearCookie("refreshToken");
+    const refreshToken = req.cookies?.refreshToken;
+
+    if (refreshToken) {
+      await Session.deleteOne({ refreshToken });
     }
+
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+    };
+
+    res.clearCookie("accessToken", cookieOptions);
+    res.clearCookie("refreshToken", cookieOptions);
 
     return res.sendStatus(204);
   } catch (error) {
-    console.log("Error while signing out", error);
+    console.error("Error while signing out", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };

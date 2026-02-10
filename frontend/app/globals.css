@@ -180,7 +180,6 @@
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
 }
-
 a,
 button {
   cursor: pointer;
@@ -200,6 +199,15 @@ h3 {
 
 section {
   @apply bg-card  border border-border shadow-sm;
+}
+
+/* globals.css */
+.nav-link {
+  @apply hover:text-primary/80 font-medium transition;
+}
+
+.dropdown-item {
+  @apply flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted text-sm;
 }
 
 @layer base {

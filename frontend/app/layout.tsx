@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cookies } from "next/headers";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/navbar/navbar";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,7 @@ export default async function RootLayout({
   if (cookieHeader) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me`, {
       headers: {
-        Cookie: cookieHeader, // ✅ đúng chuẩn HTTP
+        Cookie: cookieHeader,
       },
       cache: "no-store",
     });
@@ -48,12 +49,19 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar user={user} />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar user={user} />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

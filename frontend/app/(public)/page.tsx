@@ -1,5 +1,9 @@
-const page = () => {
-  return <div>ád</div>;
+const Home = () => {
+  return (
+    <section className="">
+      <h1>Home Page</h1>
+    </section>
+  );
 };
 
-export default page;
+export default Home;
