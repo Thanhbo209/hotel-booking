@@ -10,7 +10,6 @@ export const useLogin = () => {
     try {
       setError(null);
       await signIn(data);
-      setAccessToken(result.accessToken);
       router.push("/");
       router.refresh(); // để SSR layout load user
     } catch (err: unknown) {
