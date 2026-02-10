@@ -13,7 +13,7 @@ const registerSchema = z.object({
   firstName: z.string().min(1, "You must type in your first name!"),
   lastName: z.string().min(1, "You must type in your last name!"),
   email: z.email("Email is not valid"),
-  password: z.string().min(6, "Password must has at least 6 characters"),
+  password: z.string().min(6, "Password must have at least 6 characters"),
 });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
@@ -51,7 +51,7 @@ const RegisterForm = () => {
                 type="text"
                 {...register("firstName")}
               />
-              {errors.lastName && (
+              {errors.firstName && (
                 <p className="text-start text-destructive text-sm">
                   {errors.firstName?.message}
                 </p>
@@ -75,8 +75,8 @@ const RegisterForm = () => {
           <div className="flex flex-col py-5 gap-5">
             <Field>
               <FieldLabel>Email</FieldLabel>
-              <Input placeholder="Email" type="text" {...register("email")} />
-              {errors.lastName && (
+              <Input placeholder="Email" type="email" {...register("email")} />
+              {errors.email && (
                 <p className="text-start text-destructive text-sm">
                   {errors.email?.message}
                 </p>
@@ -89,7 +89,7 @@ const RegisterForm = () => {
                 type="password"
                 {...register("password")}
               />
-              {errors.lastName && (
+              {errors.password && (
                 <p className="text-start text-destructive text-sm">
                   {errors.password?.message}
                 </p>
