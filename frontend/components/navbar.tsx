@@ -1,11 +1,12 @@
+"use client";
+
 import Link from "next/link";
 
-export default function Navbar({ user }: { user: any | null }) {
+export default function Navbar({ user }: { user: any }) {
   return (
-    <nav className="flex gap-4 p-4 border-b">
+    <nav className="flex gap-4">
       <Link href="/">Home</Link>
 
-      {/* USER */}
       {user?.role === "USER" && (
         <>
           <Link href="/bookings">My Bookings</Link>
@@ -13,7 +14,6 @@ export default function Navbar({ user }: { user: any | null }) {
         </>
       )}
 
-      {/* OWNER / ADMIN */}
       {(user?.role === "OWNER" || user?.role === "ADMIN") && (
         <Link
           href={user.role === "ADMIN" ? "/admin/dashboard" : "/owner/dashboard"}
@@ -22,12 +22,11 @@ export default function Navbar({ user }: { user: any | null }) {
         </Link>
       )}
 
-      {/* NOT LOGIN */}
       {!user && (
-        <div className="ml-auto flex gap-3">
+        <>
           <Link href="/login">Login</Link>
           <Link href="/register">Register</Link>
-        </div>
+        </>
       )}
     </nav>
   );
