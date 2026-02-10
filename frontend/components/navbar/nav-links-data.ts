@@ -1,5 +1,3 @@
-// components/navbar/nav-links.data.ts
-
 export const NAV_LINKS = [
   {
     label: "Home",

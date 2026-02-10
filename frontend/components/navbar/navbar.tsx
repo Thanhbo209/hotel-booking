@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { User, Menu, X, LogOut, LayoutDashboard, BookOpen } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useLogout } from "@/features/auth/hooks/useLogout";
 import { UserType } from "@/types/user";
@@ -13,15 +13,15 @@ import clsx from "clsx";
 export default function Navbar({ user }: { user?: UserType | null }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { logout } = useLogout();
+  const { logout, error } = useLogout();
   const [isShrink, setIsShrink] = useState(false);
-  let lastScrollY = 0;
-
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
         // scroll xuống
         setIsShrink(true);
       } else {
@@ -29,11 +29,24 @@ export default function Navbar({ user }: { user?: UserType | null }) {
         setIsShrink(false);
       }
 
-      lastScrollY = currentScrollY;
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -43,7 +56,7 @@ export default function Navbar({ user }: { user?: UserType | null }) {
         isShrink ? "h-14" : "h-20",
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center pt-5 justify-between">
+      <div className="max-w-7xl mx-auto px-4 h-full flex items-center  justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <span className="text-3xl font-bold">
@@ -79,7 +92,10 @@ export default function Navbar({ user }: { user?: UserType | null }) {
 
               {/* Dropdown */}
               {isDropdownOpen && (
-                <div className="absolute right-0 top-12 w-48 rounded-xl border shadow-lg p-2 z-50">
+                <div
+                  ref={dropdownRef}
+                  className="absolute right-0 top-12 w-48 rounded-xl border shadow-lg p-2 z-50"
+                >
                   <div className="text-sm text-start p-2">
                     Welcome,{" "}
                     <span className="font-bold text-primary">
@@ -111,7 +127,7 @@ export default function Navbar({ user }: { user?: UserType | null }) {
                     <User className="w-4 h-4" />
                     Profile
                   </Link>
-
+                  {error && <p className="text-destructive text-sm">{error}</p>}
                   <Button
                     variant={"outline"}
                     onClick={logout}
