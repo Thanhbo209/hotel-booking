@@ -1,7 +1,7 @@
 import { RegisterFormValues } from "@/features/auth/schemas/auth-schema";
 
 export const signUp = async (payload: RegisterFormValues) => {
-  const res = await fetch("/api/auth/sign-up", {
+  const res = await fetch("/api/auth/signUp", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

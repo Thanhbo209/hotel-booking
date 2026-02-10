@@ -15,7 +15,7 @@ import {
 import { useRegister } from "../hooks/useRegister";
 
 export const RegisterForm = () => {
-  const { submit } = useRegister();
+  const { submit, error } = useRegister();
 
   const {
     register,
@@ -93,13 +93,14 @@ export const RegisterForm = () => {
             </Field>
           </div>
 
+          {error && <p className="text-destructive text-sm">{error}</p>}
           <Button className="mt-5 w-full" type="submit" disabled={isSubmitting}>
             Create Account
           </Button>
         </form>
         <div className="flex justify-center items-center gap-2 py-2">
           <span className="font-thin text-muted-foreground">
-            Already have account?{" "}
+            Already have an account?{" "}
           </span>
           <Link
             href="/login"

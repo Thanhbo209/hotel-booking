@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 export const LoginForm = () => {
-  const { submit } = useLogin();
+  const { submit, error } = useLogin();
 
   const {
     register,
@@ -63,6 +63,7 @@ export const LoginForm = () => {
             </Field>
           </div>
 
+          {error && <p className="text-destructive text-sm">{error}</p>}
           <Button className="mt-5" disabled={isSubmitting}>
             Log In
           </Button>
