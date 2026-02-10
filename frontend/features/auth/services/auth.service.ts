@@ -39,3 +39,19 @@ export const signIn = async (payload: LoginFormValues) => {
 
   return result;
 };
+
+export const signOut = async (): Promise<void> => {
+  const res = await fetch(`${API_URL}/auth/signOut`, {
+    method: "POST",
+    credentials: "include", // để gửi refreshToken cookie
+  });
+
+  if (!res.ok) {
+    let message = "Logout failed";
+    try {
+      const error = await res.json();
+      message = error.message ?? message;
+    } catch {}
+    throw new Error(message);
+  }
+};

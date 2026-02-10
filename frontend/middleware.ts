@@ -21,7 +21,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // Có token → gọi backend lấy user
-  const res = await fetch(`${process.env.BACKEND_URL}/users/me`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me`, {
     headers: {
       cookie: req.headers.get("cookie") || "",
     },
