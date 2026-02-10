@@ -10,12 +10,13 @@ export const useLogin = () => {
     try {
       setError(null);
       await signIn(data);
-      setAccessToken(result.accessToken);
+      // TODO: redirect to dashboard or show success toast
       router.push("/");
       router.refresh(); // để SSR layout load user
     } catch (err: unknown) {
       // Surface error to the caller/UI
-      const message = err instanceof Error ? err.message : "Login failed";
+      const message =
+        err instanceof Error ? err.message.toUpperCase() : "Login failed";
       setError(message);
     }
   };

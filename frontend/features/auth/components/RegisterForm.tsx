@@ -15,7 +15,7 @@ import {
 import { useRegister } from "../hooks/useRegister";
 
 export const RegisterForm = () => {
-  const { submit, error } = useRegister();
+  const { submit, error, success } = useRegister();
 
   const {
     register,
@@ -94,6 +94,9 @@ export const RegisterForm = () => {
           </div>
 
           {error && <p className="text-destructive text-sm">{error}</p>}
+          {success && (
+            <p className="text-green-600 text-sm text-center">{success}</p>
+          )}
           <Button className="mt-5 w-full" type="submit" disabled={isSubmitting}>
             Create Account
           </Button>

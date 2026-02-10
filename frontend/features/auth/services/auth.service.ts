@@ -15,11 +15,13 @@ export const signUp = async (payload: RegisterFormValues) => {
     body: JSON.stringify(payload),
   });
 
+  const data = await res.json();
+
   if (!res.ok) {
-    throw await res.json();
+    throw new Error(data.message || "Sign up failed");
   }
 
-  return res.json();
+  return data;
 };
 
 export const signIn = async (payload: LoginFormValues) => {
