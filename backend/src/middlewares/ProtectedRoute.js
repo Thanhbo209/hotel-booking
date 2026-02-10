@@ -2,19 +2,16 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 export const authenticate = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
+  const token = req.cookies?.accessToken;
 
-  if (!authHeader?.startsWith("Bearer ")) {
+  if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
   }
-
-  const token = authHeader.split(" ")[1];
 
   try {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     const user = await User.findById(decoded.userId).select("-password");
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -22,9 +19,7 @@ export const authenticate = async (req, res, next) => {
     req.user = user;
     next();
   } catch (err) {
-    return res
-      .status(401)
-      .json({ message: "Access token is invalid or expired" });
+    return res.status(401).json({ message: "Token expired or invalid" });
   }
 };
 
