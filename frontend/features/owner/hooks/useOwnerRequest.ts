@@ -18,8 +18,10 @@ export const useOwnerRequest = () => {
       const data = await ownerRequestService.createRequest(message);
 
       setSuccess(data.message || "Request sent successfully");
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Something went wrong!";
+      setError(message);
     } finally {
       setLoading(false);
     }
