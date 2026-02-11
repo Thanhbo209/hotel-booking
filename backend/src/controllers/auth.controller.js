@@ -32,6 +32,7 @@ export const signUp = async (req, res) => {
       email,
       password: hashPassword,
       fullName: `${firstName} ${lastName}`,
+      role: "USER",
     });
 
     return res.status(201).json({ message: "User created successfully!" });
