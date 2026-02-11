@@ -6,7 +6,7 @@ import { createOwnerRequest } from "../controllers/ownerRequest.controller.js";
 const router = express.Router();
 
 router.use(authenticate);
+router.post("/create-request", authorize("USER"), createOwnerRequest);
 router.get("/me", authMe);
-router.post("/", authorize("USER"), createOwnerRequest);
 
 export default router;

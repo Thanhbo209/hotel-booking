@@ -94,6 +94,12 @@ export const signIn = async (req, res) => {
 
     return res.status(200).json({
       message: `Welcome ${user.fullName}`,
+      user: {
+        _id: user._id,
+        email: user.email,
+        fullName: user.fullName,
+        role: user.role, // 🔥 QUAN TRỌNG
+      },
     });
   } catch (err) {
     console.error("signIn error", err);

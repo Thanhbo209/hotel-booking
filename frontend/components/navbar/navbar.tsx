@@ -94,7 +94,7 @@ export default function Navbar({ user }: { user?: UserType | null }) {
               {isDropdownOpen && (
                 <div
                   ref={dropdownRef}
-                  className="absolute right-0 top-12 w-48 rounded-xl border shadow-lg p-2 z-50"
+                  className="absolute bg-background right-0 top-12 w-48 rounded-xl border shadow-lg p-2 z-50"
                 >
                   <div className="text-sm text-start p-2">
                     Welcome,{" "}

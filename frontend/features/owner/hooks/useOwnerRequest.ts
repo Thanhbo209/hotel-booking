@@ -1,0 +1,34 @@
+// src/features/owner/hooks/useOwnerRequest.ts
+"use client";
+
+import { useState } from "react";
+import { ownerRequestService } from "@/features/owner/services/ownerRequest.service";
+
+export const useOwnerRequest = () => {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const requestOwner = async (message?: string) => {
+    try {
+      setLoading(true);
+      setError(null);
+      setSuccess(null);
+
+      const data = await ownerRequestService.createRequest(message);
+
+      setSuccess(data.message || "Request sent successfully");
+    } catch (err: any) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return {
+    requestOwner,
+    loading,
+    success,
+    error,
+  };
+};
