@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import OwnerRequestButton from "@/components/footer/ownerRequest";
 
 export default function Footer() {
   return (
@@ -19,7 +19,8 @@ export default function Footer() {
           {/* Call to Action */}
           <div className="flex flex-col items-start md:items-end gap-2">
             <p className="text-xl font-medium">Become hotel owner</p>
-            <Button className="text-md">Register Now</Button>
+
+            <OwnerRequestButton />
           </div>
         </div>
 
