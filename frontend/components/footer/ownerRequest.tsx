@@ -9,7 +9,7 @@ export default function OwnerRequestButton() {
   const router = useRouter();
   const user = useAuthStore((s) => s.user);
 
-  const { requestOwner, loading } = useOwnerRequest();
+  const { requestOwner, loading, success, error } = useOwnerRequest();
 
   const handleClick = async () => {
     // Chưa login
@@ -27,7 +27,15 @@ export default function OwnerRequestButton() {
     // USER → gửi request
     if (user.role === "USER") {
       await requestOwner("Request to become hotel owner");
+      return;
     }
+
+    // ⚠️ Fallback cho role không xác định
+    console.error("Unexpected user role in OwnerRequestButton:", user.role);
+
+    // Có thể redirect về trang an toàn
+    router.push("/");
+    // hoặc sau này thay bằng toast/error UI
   };
 
   const renderLabel = () => {
@@ -38,8 +46,12 @@ export default function OwnerRequestButton() {
   };
 
   return (
-    <Button onClick={handleClick} disabled={loading} className="text-md">
-      {renderLabel()}
-    </Button>
+    <div className="flex flex-col gap-5">
+      {success && <p className="text-green-600 text-sm mt-1">{success}</p>}
+      {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
+      <Button onClick={handleClick} disabled={loading} className="text-md">
+        {renderLabel()}
+      </Button>
+    </div>
   );
 }

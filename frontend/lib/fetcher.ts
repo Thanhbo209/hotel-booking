@@ -1,12 +1,13 @@
 // src/lib/fetcher.ts
 export const fetcher = async (url: string, options: RequestInit = {}) => {
+  const { headers, ...rest } = options;
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}${url}`, {
-    credentials: "include", // 👈 gửi cookie
+    credentials: "include",
+    ...rest,
     headers: {
       "Content-Type": "application/json",
-      ...(options.headers || {}),
+      ...(headers || {}),
     },
-    ...options,
   });
 
   const data = await res.json().catch(() => null);
