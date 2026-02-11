@@ -74,7 +74,7 @@ export default function Navbar({ user }: { user?: UserType | null }) {
             <>
               <Link
                 href="/login"
-                className="bg-primary text-background text-md px-6  py-1 rounded-md hover:bg-primary/80"
+                className="bg-primary text-black text-md px-6  py-1 rounded-md hover:bg-primary/80"
               >
                 Login
               </Link>

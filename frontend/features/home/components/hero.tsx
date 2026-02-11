@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const Hero = () => {
   return (
-    <main className="relative overflow-hidden border-none">
+    <div className="relative overflow-hidden border-none">
       {/* Decorative elements */}
 
       <div className=" mx-auto px-4 py-12 md:py-20">
@@ -24,7 +24,7 @@ export const Hero = () => {
             {/* Heading */}
             <div className="space-y-4">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                <span className=" bg-clip-text ">Forget Busy Work,</span>
+                <span>Forget Busy Work,</span>
                 <br />
                 <span className="bg-linear-to-r from-primary to-destructive bg-clip-text text-transparent">
                   Start Next Vacation
@@ -41,7 +41,7 @@ export const Hero = () => {
             <div className="flex flex-wrap gap-4">
               <Button
                 size="lg"
-                className="bg-primary hover:primary/80  px-8 py-6 text-lg rounded-md shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300"
+                className="bg-primary hover:bg-primary/80  px-8 py-6 text-lg rounded-md shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300"
               >
                 Show More
               </Button>
@@ -105,7 +105,7 @@ export const Hero = () => {
             </div>
 
             {/* Floating Card */}
-            <div className="absolute top-1/4 left-1/15 bg-foreground rounded-2xl shadow-xl p-4 transform -translate-y-1/2 hover:scale-105 transition-transform duration-300">
+            <div className="absolute top-1/4 left-[6.67%] bg-foreground rounded-2xl shadow-xl p-4 transform -translate-y-1/2 hover:scale-105 transition-transform duration-300">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-linear-to-br from-primary to-destructive rounded-full flex items-center justify-center">
                   <MapPin className="w-6 h-6 text-background" />
@@ -124,6 +124,6 @@ export const Hero = () => {
       </div>
 
       <SearchFilter />
-    </main>
+    </div>
   );
 };

@@ -66,24 +66,26 @@ const SearchFilter = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-64">
-            {Object.entries(LOCATION_BY_REGION).map(([region, cities]) => (
-              <div key={region}>
-                <DropdownMenuLabel className="text-xs font-semibold text-muted-foreground">
-                  {region}
-                </DropdownMenuLabel>
-                {cities.map((city) => (
-                  <DropdownMenuItem
-                    key={city}
-                    onClick={() => setLocation(city)}
-                    className="cursor-pointer"
-                  >
-                    <MapPin className="mr-2 h-4 w-4 text-muted-foreground" />
-                    {city}
-                  </DropdownMenuItem>
-                ))}
-                <DropdownMenuSeparator />
-              </div>
-            ))}
+            {Object.entries(LOCATION_BY_REGION).map(
+              ([region, cities], index, arr) => (
+                <div key={region}>
+                  <DropdownMenuLabel className="text-xs font-semibold text-muted-foreground">
+                    {region}
+                  </DropdownMenuLabel>
+                  {cities.map((city) => (
+                    <DropdownMenuItem
+                      key={city}
+                      onClick={() => setLocation(city)}
+                      className="cursor-pointer"
+                    >
+                      <MapPin className="mr-2 h-4 w-4 text-muted-foreground" />
+                      {city}
+                    </DropdownMenuItem>
+                  ))}
+                  {index < arr.length - 1 && <DropdownMenuSeparator />}
+                </div>
+              ),
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
 
@@ -118,7 +120,11 @@ const SearchFilter = () => {
               selected={date}
               onSelect={setDate}
               initialFocus
-              disabled={(date) => date < new Date()}
+              disabled={(d) => {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                return d < today;
+              }}
             />
           </PopoverContent>
         </Popover>
@@ -139,7 +145,7 @@ const SearchFilter = () => {
                     Person
                   </span>
                   <span className="text-sm font-semibold truncate w-full">
-                    {totalGuests} persons
+                    {totalGuests} {totalGuests === 1 ? "person" : "persons"}
                   </span>
                 </div>
               </div>
