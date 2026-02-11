@@ -18,7 +18,7 @@ export default function Footer() {
 
           {/* Call to Action */}
           <div className="flex flex-col items-start md:items-end gap-2">
-            <p className="text-xl font-medium">Become hotel Owner</p>
+            <p className="text-xl font-medium">Become hotel owner</p>
             <Button className="text-md">Register Now</Button>
           </div>
         </div>

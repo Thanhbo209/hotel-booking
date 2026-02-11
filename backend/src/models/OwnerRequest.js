@@ -7,7 +7,6 @@ const OwnerRequestSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      unique: true, // mỗi user chỉ gửi 1 request pending
     },
 
     message: {
@@ -30,6 +29,10 @@ const OwnerRequestSchema = new mongoose.Schema(
     reviewedAt: Date,
   },
   { timestamps: true },
+);
+OwnerRequestSchema.index(
+  { user: 1 },
+  { unique: true, partialFilterExpression: { status: "PENDING" } },
 );
 
 export default mongoose.model("OwnerRequest", OwnerRequestSchema);

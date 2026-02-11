@@ -17,7 +17,7 @@ export const signUp = async (req, res) => {
       });
     }
 
-    // Validate exist <user></user>
+    // Validate exist user
     const user = await User.findOne({ email });
 
     if (user) {
