@@ -5,7 +5,7 @@ import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -13,13 +13,6 @@ import {
   RegisterFormValues,
 } from "@/features/auth/schemas/auth-schema";
 import { useRegister } from "../hooks/useRegister";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 export const RegisterForm = () => {
   const { submit, error, success } = useRegister();
@@ -27,7 +20,6 @@ export const RegisterForm = () => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -77,32 +69,6 @@ export const RegisterForm = () => {
           </div>
 
           <div className="flex flex-col py-5 gap-5">
-            {/* Role */}
-            <Field>
-              <FieldLabel>You are?</FieldLabel>
-
-              <Controller
-                name="role"
-                control={control}
-                render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select role" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="USER">Customer</SelectItem>
-                      <SelectItem value="OWNER">Hotel Owner</SelectItem>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-
-              {errors.role && (
-                <p className="text-start text-destructive text-sm">
-                  {errors.role.message}
-                </p>
-              )}
-            </Field>
             <Field>
               <FieldLabel>Email</FieldLabel>
               <Input placeholder="Email" type="email" {...register("email")} />

@@ -8,7 +8,7 @@ const ACCESS_TOKEN_TTL = 30 * 60 * 1000;
 const REFREST_TOKEN_TTL = 14 * 24 * 60 * 60 * 1000; // 14 DAYS
 export const signUp = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, role } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     // Validate
     if (!firstName || !lastName || !email || !password) {
@@ -17,11 +17,7 @@ export const signUp = async (req, res) => {
       });
     }
 
-    // Validate role
-    const allowedRoles = ["OWNER", "USER"];
-    const userRole = role && allowedRoles.includes(role) ? role : "USER";
-
-    // Validate exist user
+    // Validate exist <user></user>
     const user = await User.findOne({ email });
 
     if (user) {
@@ -36,12 +32,10 @@ export const signUp = async (req, res) => {
       email,
       password: hashPassword,
       fullName: `${firstName} ${lastName}`,
-      role: userRole,
+      role: "USER",
     });
 
-    return res
-      .status(201)
-      .json({ message: "User created successfully!", role: userRole });
+    return res.status(201).json({ message: "User created successfully!" });
   } catch (error) {
     console.error("Error while signing up", error);
     return res.status(500).json({ message: "Internal server error" });
