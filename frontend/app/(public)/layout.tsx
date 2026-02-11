@@ -35,35 +35,30 @@ export default async function RootLayout({
   let user = null;
 
   if (cookieHeader) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me`, {
-      headers: {
-        Cookie: cookieHeader,
-      },
-      cache: "no-store",
-    });
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me`,
+        {
+          headers: {
+            Cookie: cookieHeader,
+          },
+          cache: "no-store",
+        },
+      );
 
-    if (res.ok) {
-      user = await res.json();
+      if (res.ok) {
+        user = await res.json();
+      }
+    } catch {
+      // Backend unreachable — continue with user = null
     }
   }
 
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar user={user} />
-          {children}
-          <Footer />
-        </ThemeProvider>
-      </body>
-    </html>
+    <>
+      <Navbar user={user} />
+      {children}
+      <Footer />
+    </>
   );
 }
