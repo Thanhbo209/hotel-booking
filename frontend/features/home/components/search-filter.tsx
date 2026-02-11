@@ -46,8 +46,8 @@ const SearchFilter = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
-              variant="ghost"
-              className="w-full justify-between text-left font-normal h-16 px-5 hover:bg-accent/50 rounded-xl border border-transparent hover:border-border transition-all"
+              variant="outline"
+              className="w-full justify-between text-left font-normal h-16 px-5 hover:bg-accent/50 rounded-md border border-transparent hover:border-border transition-all"
             >
               <div className="flex items-center gap-3 overflow-hidden">
                 <div className="shrink-0 w-10 h-10  rounded-lg flex items-center justify-center">
@@ -93,8 +93,8 @@ const SearchFilter = () => {
         <Popover>
           <PopoverTrigger asChild>
             <Button
-              variant="ghost"
-              className="w-full justify-between text-left font-normal h-16 px-5 hover:bg-accent/50 rounded-xl border border-transparent hover:border-border transition-all"
+              variant="outline"
+              className="w-full justify-between text-left font-normal h-16 px-5 hover:bg-accent/50 rounded-md border border-transparent hover:border-border transition-all"
             >
               <div className="flex items-center gap-3 overflow-hidden">
                 <div className="shrink-0 w-10 h-10  rounded-lg flex items-center justify-center">
@@ -133,8 +133,8 @@ const SearchFilter = () => {
         <DropdownMenu open={isGuestMenuOpen} onOpenChange={setIsGuestMenuOpen}>
           <DropdownMenuTrigger asChild>
             <Button
-              variant="ghost"
-              className="w-full justify-between text-left font-normal h-16 px-5 hover:bg-accent/50 rounded-xl border border-transparent hover:border-border transition-all"
+              variant="outline"
+              className="w-full justify-between text-left font-normal h-16 px-5 rounded-md border border-transparent hover:border-border transition-all"
             >
               <div className="flex items-center gap-3 overflow-hidden">
                 <div className="shrink-0 w-10 h-10  rounded-lg flex items-center justify-center">
@@ -236,8 +236,9 @@ const SearchFilter = () => {
         {/* Search Button */}
         <Button
           size="lg"
+          variant={"default"}
           onClick={handleSearch}
-          className="w-full h-16 bg-primary font-semibold shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300 rounded-xl"
+          className="w-full h-16 text-xl   shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300 rounded-xl"
         >
           <Search className="mr-2 h-5 w-5" />
           Search
