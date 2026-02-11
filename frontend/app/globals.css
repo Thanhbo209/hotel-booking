@@ -186,7 +186,7 @@ button {
 }
 
 h1 {
-  @apply text-3xl font-bold;
+  @apply text-5xl font-bold;
 }
 
 h2 {
@@ -198,7 +198,7 @@ h3 {
 }
 
 section {
-  @apply bg-card  border border-border shadow-sm;
+  @apply border border-border shadow-sm;
 }
 
 /* globals.css */
