@@ -37,7 +37,7 @@ export const OWNER_SIDEBAR_LINKS = [
     position: "bottom" as const,
   },
   {
-    label: "Setting",
+    label: "Settings",
     path: "/owner/settings",
     icon: Settings,
     position: "bottom" as const,

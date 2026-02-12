@@ -1,4 +1,3 @@
-// app/(owner)/owner/layout.tsx
 import Sidebar from "@/components/sidebar/sidebar";
 import { ADMIN_SIDEBAR_LINKS } from "@/components/sidebar/admin-datas/admin-links";
 import AdminNavbar from "@/components/navbar/admin-navbar/admin-navbar";

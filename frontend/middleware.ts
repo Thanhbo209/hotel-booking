@@ -43,11 +43,11 @@ export async function middleware(req: NextRequest) {
   // =====================
   if (isAuthPage) {
     if (user.role === "ADMIN") {
-      return NextResponse.redirect(new URL("/admin", req.url));
+      return NextResponse.redirect(new URL("/admin/dashboard", req.url));
     }
 
     if (user.role === "OWNER") {
-      return NextResponse.redirect(new URL("/owner", req.url));
+      return NextResponse.redirect(new URL("/owner/dashboard", req.url));
     }
 
     return NextResponse.redirect(new URL("/", req.url));

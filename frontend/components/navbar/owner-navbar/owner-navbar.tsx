@@ -74,13 +74,13 @@ export default function OwnerNavbar() {
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem>
-              {error && <p className="text-destructive text-sm">{error}</p>}
-              <Button variant={"ghost"} onClick={logout} className="w-full">
-                <LogOut className="w-4 h-4" />
-                Logout
-              </Button>
+            <DropdownMenuItem className="text-red-600" onClick={logout}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
             </DropdownMenuItem>
+            {error && (
+              <p className="text-destructive text-sm px-2 pb-2">{error}</p>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

@@ -55,7 +55,7 @@ export const ADMIN_SIDEBAR_LINKS = [
     position: "bottom" as const,
   },
   {
-    label: "Setting",
+    label: "Settings",
     path: "/admin/settings",
     icon: Settings,
     position: "bottom" as const,

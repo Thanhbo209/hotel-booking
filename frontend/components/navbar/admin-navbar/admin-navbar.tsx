@@ -52,8 +52,8 @@ export default function AdminNavbar() {
 
               <div className="text-left hidden md:block">
                 <p className="text-sm font-medium">{user.fullName}</p>
-                {user.role === "OWNER" && (
-                  <p className="text-xs text-muted-foreground">Admin</p>
+                {user.role === "ADMIN" && (
+                  <p className="text-xs text-muted-foreground">Super Admin</p>
                 )}
               </div>
             </Button>
@@ -74,13 +74,13 @@ export default function AdminNavbar() {
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem className="text-red-600">
-              {error && <p className="text-destructive text-sm">{error}</p>}
-              <Button variant={"ghost"} onClick={logout} className="w-full">
-                <LogOut className="w-4 h-4" />
-                Logout
-              </Button>
+            <DropdownMenuItem className="text-destructive" onClick={logout}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
             </DropdownMenuItem>
+            {error && (
+              <p className="text-destructive text-sm px-2 pb-2">{error}</p>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

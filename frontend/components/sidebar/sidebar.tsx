@@ -39,7 +39,7 @@ export default function Sidebar({ links, logo = "Hotel" }: SidebarProps) {
       <div className="p-6">
         <h2 className="flex">
           {logo}
-          <p className="text-primary">Hub</p>
+          <span className="text-primary">Hub</span>
         </h2>
       </div>
 
