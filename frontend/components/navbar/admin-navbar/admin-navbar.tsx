@@ -9,11 +9,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, LogOut, Settings, User } from "lucide-react";
+import { Bell, Home, LogOut, Settings, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/stores/auth-store";
 import { useLogout } from "@/features/auth/hooks/useLogout";
 import { useHydrateAuth } from "@/features/auth/hooks/useHydrateAuth";
+import Link from "next/link";
 
 export default function AdminNavbar() {
   useHydrateAuth();
@@ -30,15 +31,21 @@ export default function AdminNavbar() {
     .toUpperCase();
 
   return (
-    <header className="flex items-center justify-between px-6 py-4 border-b bg-white">
+    <header className="flex items-center justify-between px-6 py-4 border-b ">
       {/* Left */}
       <div>
-        <h2 className="text-lg font-semibold">Welcome back! 👋</h2>
-        <p className="text-sm text-muted-foreground">Have a nice day</p>
+        <h2 className="text-lg font-semibold">Welcome back!</h2>
+        <p className="text-sm text-muted-foreground">Have a nice day 👋</p>
       </div>
 
       {/* Right */}
       <div className="flex items-center gap-4">
+        {/* Home */}
+        <Button variant="ghost" size="icon" asChild>
+          <Link href="/">
+            <Home className="w-5 h-5" />
+          </Link>
+        </Button>
         {/* Notification */}
         <Button variant="ghost" size="icon">
           <Bell className="w-5 h-5" />
