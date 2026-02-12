@@ -4,57 +4,30 @@ import {
 } from "@/features/auth/schemas/auth-schema";
 import { fetcher } from "@/lib/fetcher";
 
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-if (!API_URL) {
-  throw new Error("NEXT_PUBLIC_BACKEND_URL is not configured");
-}
-
+// ========================
+// User
+// ========================
 export const getMe = () => fetcher("/users/me");
 
-export const signUp = async (payload: RegisterFormValues) => {
-  const res = await fetch(`${API_URL}/auth/signUp`, {
+// ========================
+// Auth
+// ========================
+export const signUp = (payload: RegisterFormValues) => {
+  return fetcher("/auth/signUp", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw new Error(data.message || "Sign up failed");
-  }
-
-  return data;
 };
 
-export const signIn = async (payload: LoginFormValues) => {
-  const res = await fetch(`${API_URL}/auth/signIn`, {
+export const signIn = (payload: LoginFormValues) => {
+  return fetcher("/auth/signIn", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
     body: JSON.stringify(payload),
   });
-
-  const result = await res.json();
-  if (!res.ok) {
-    throw new Error(result.message || "Login failed");
-  }
-
-  return result;
 };
 
-export const signOut = async (): Promise<void> => {
-  const res = await fetch(`${API_URL}/auth/signOut`, {
+export const signOut = () => {
+  return fetcher("/auth/signOut", {
     method: "POST",
-    credentials: "include", // để gửi refreshToken cookie
   });
-
-  if (!res.ok) {
-    let message = "Logout failed";
-    try {
-      const error = await res.json();
-      message = error.message ?? message;
-    } catch {}
-    throw new Error(message);
-  }
 };

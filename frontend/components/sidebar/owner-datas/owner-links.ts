@@ -6,6 +6,7 @@ import {
   MessageSquare,
   HelpCircle,
   Settings,
+  DollarSign,
 } from "lucide-react";
 
 export const OWNER_SIDEBAR_LINKS = [
@@ -23,6 +24,11 @@ export const OWNER_SIDEBAR_LINKS = [
     label: "Bookings",
     path: "/owner/bookings",
     icon: FileText,
+  },
+  {
+    label: "Refund",
+    path: "/admin/refund",
+    icon: DollarSign,
   },
   {
     label: "Message",

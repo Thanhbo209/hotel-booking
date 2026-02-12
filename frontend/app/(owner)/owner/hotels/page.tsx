@@ -1,11 +1,10 @@
 import Breadcrumb from "@/components/ui/breadcrum";
-import React from "react";
 
 const page = () => {
   return (
-    <div className="">
+    <div>
       <Breadcrumb />
-      <h2>Owner</h2>
+      <h2>My Hotel</h2>
     </div>
   );
 };

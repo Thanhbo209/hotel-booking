@@ -14,7 +14,7 @@ export default function OwnerLayout({
 
       <div className="flex-1 flex flex-col">
         <OwnerNavbar />
-        <main className="flex-1 p-8 bg-gray-50">{children}</main>
+        <main className="flex-1 p-8 ">{children}</main>
       </div>
     </div>
   );
