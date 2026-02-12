@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ownerRequestAdminService } from "@/features/admin/services/ownerRequestAdmin.service";
+import useOwnerRequestsAdmin from "@/features/admin/hooks/useOwnerRequestsAdmin";
 
 import {
   Table,
@@ -14,58 +13,10 @@ import {
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-
-interface OwnerRequest {
-  _id: string;
-  message?: string;
-  createdAt: string;
-  user: {
-    _id: string;
-    fullName: string;
-    email: string;
-    avatarURL?: string;
-  };
-}
 
 export default function OwnerRequestsPage() {
-  const [requests, setRequests] = useState<OwnerRequest[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchRequests = async () => {
-    try {
-      const data = await ownerRequestAdminService.getAll();
-      setRequests(data);
-    } catch (err: any) {
-      toast.error(err.message || "Failed to fetch requests");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchRequests();
-  }, []);
-
-  const handleApprove = async (id: string) => {
-    try {
-      await ownerRequestAdminService.approve(id);
-      toast.success("User promoted to OWNER");
-      fetchRequests();
-    } catch (err: any) {
-      toast.error(err.message);
-    }
-  };
-
-  const handleReject = async (id: string) => {
-    try {
-      await ownerRequestAdminService.reject(id);
-      toast.success("Request rejected");
-      fetchRequests();
-    } catch (err: any) {
-      toast.error(err.message);
-    }
-  };
+  const { requests, loading, actionId, approve, reject } =
+    useOwnerRequestsAdmin();
 
   if (loading) return <p className="p-6">Loading...</p>;
 
@@ -73,7 +24,7 @@ export default function OwnerRequestsPage() {
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-6">Owner Requests</h1>
 
-      <Table>
+      <Table className="bg-card border border-border">
         <TableHeader>
           <TableRow>
             <TableHead>User</TableHead>
@@ -116,14 +67,19 @@ export default function OwnerRequestsPage() {
               </TableCell>
 
               <TableCell className="text-right space-x-2">
-                <Button size="sm" onClick={() => handleApprove(req._id)}>
+                <Button
+                  size="sm"
+                  disabled={actionId === req._id}
+                  onClick={() => approve(req._id)}
+                >
                   Approve
                 </Button>
 
                 <Button
                   size="sm"
                   variant="destructive"
-                  onClick={() => handleReject(req._id)}
+                  disabled={actionId === req._id}
+                  onClick={() => reject(req._id)}
                 >
                   Reject
                 </Button>

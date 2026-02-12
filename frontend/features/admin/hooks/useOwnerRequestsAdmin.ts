@@ -1,57 +1,72 @@
-// src/features/ownerRequests/hooks/useOwnerRequestsAdmin.ts
 "use client";
 
-import { useEffect, useState } from "react";
-import { ownerRequestAdminService } from "../services/ownerRequestAdmin.service";
+import { useEffect, useState, useCallback } from "react";
+import { ownerRequestAdminService } from "@/features/admin/services/ownerRequestAdmin.service";
+import { toast } from "sonner";
 
 export interface OwnerRequest {
   _id: string;
-  user: {
-    name: string;
-    email: string;
-  };
   message?: string;
-  status: "PENDING" | "APPROVED" | "REJECTED";
   createdAt: string;
+  user: {
+    _id: string;
+    fullName: string;
+    email: string;
+    avatarURL?: string;
+  };
 }
 
-export const useOwnerRequestsAdmin = () => {
-  const [data, setData] = useState<OwnerRequest[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+export default function useOwnerRequestsAdmin() {
+  const [requests, setRequests] = useState<OwnerRequest[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [actionId, setActionId] = useState<string | null>(null);
 
-  const fetchRequests = async () => {
+  const fetchRequests = useCallback(async () => {
     try {
-      setLoading(true);
-      setError(null);
-      const res = await ownerRequestAdminService.getAll();
-      setData(res);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load requests");
+      const data = await ownerRequestAdminService.getAll();
+      setRequests(data);
+    } catch (err: any) {
+      toast.error(err.message || "Failed to fetch requests");
     } finally {
       setLoading(false);
     }
-  };
-
-  const approve = async (id: string) => {
-    await ownerRequestAdminService.approve(id);
-    fetchRequests();
-  };
-
-  const reject = async (id: string) => {
-    await ownerRequestAdminService.reject(id);
-    fetchRequests();
-  };
+  }, []);
 
   useEffect(() => {
     fetchRequests();
-  }, []);
+  }, [fetchRequests]);
+
+  const approve = async (id: string) => {
+    setActionId(id);
+    try {
+      await ownerRequestAdminService.approve(id);
+      toast.success("User promoted to OWNER");
+      setRequests((prev) => prev.filter((r) => r._id !== id));
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setActionId(null);
+    }
+  };
+
+  const reject = async (id: string) => {
+    setActionId(id);
+    try {
+      await ownerRequestAdminService.reject(id);
+      toast.success("Request rejected");
+      setRequests((prev) => prev.filter((r) => r._id !== id));
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setActionId(null);
+    }
+  };
 
   return {
-    data,
+    requests,
     loading,
-    error,
+    actionId,
     approve,
     reject,
   };
-};
+}
