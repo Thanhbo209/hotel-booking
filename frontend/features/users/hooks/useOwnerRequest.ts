@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { ownerRequestService } from "@/features/owner/services/ownerRequest.service";
+import { ownerRequestService } from "@/features/users/services/ownerRequest.service";
 
 export const useOwnerRequest = () => {
   const [loading, setLoading] = useState(false);

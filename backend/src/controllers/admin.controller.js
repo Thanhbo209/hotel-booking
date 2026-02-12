@@ -5,7 +5,7 @@ import User from "../models/User.js";
 export const getOwnerRequests = async (req, res) => {
   try {
     const requests = await OwnerRequest.find({ status: "PENDING" })
-      .populate("user", "email fullName")
+      .populate("user", "email fullName avatarURL role")
       .sort({ createdAt: -1 });
 
     res.json(requests);

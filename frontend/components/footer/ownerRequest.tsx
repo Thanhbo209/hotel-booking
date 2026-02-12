@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useOwnerRequest } from "@/features/owner/hooks/useOwnerRequest";
+import { useOwnerRequest } from "@/features/users/hooks/useOwnerRequest";
 import { useAuthStore } from "@/stores/auth-store";
 
 export default function OwnerRequestButton() {

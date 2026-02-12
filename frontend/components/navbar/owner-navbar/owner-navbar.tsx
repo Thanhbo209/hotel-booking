@@ -13,8 +13,11 @@ import { Bell, LogOut, Settings, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/stores/auth-store";
 import { useLogout } from "@/features/auth/hooks/useLogout";
+import { useHydrateAuth } from "@/features/auth/hooks/useHydrateAuth";
 
 export default function OwnerNavbar() {
+  useHydrateAuth();
+
   const user = useAuthStore((s) => s.user);
   const { logout, error } = useLogout();
   if (!user) return null;
