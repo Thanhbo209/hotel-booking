@@ -12,7 +12,12 @@ export default function Breadcrumb() {
   const pathname = usePathname();
 
   const segments = pathname.split("/").filter(Boolean);
-
+  const lastVisibleIndex = (() => {
+    for (let i = segments.length - 1; i >= 0; i--) {
+      if (formatLabel(segments[i])) return i;
+    }
+    return -1;
+  })();
   return (
     <nav className="text-sm text-muted-foreground">
       <ol className="flex items-center gap-2">
@@ -27,7 +32,7 @@ export default function Breadcrumb() {
           if (!label) return null;
 
           const href = "/" + segments.slice(0, index + 1).join("/");
-          const isLast = index === segments.length - 1;
+          const isLast = index === lastVisibleIndex;
 
           return (
             <li key={href} className="flex items-center gap-2">

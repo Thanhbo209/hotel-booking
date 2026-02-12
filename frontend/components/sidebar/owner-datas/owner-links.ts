@@ -27,7 +27,7 @@ export const OWNER_SIDEBAR_LINKS = [
   },
   {
     label: "Refund",
-    path: "/admin/refund",
+    path: "/owner/refund",
     icon: DollarSign,
   },
   {

@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/ui/breadcrum";
+import Breadcrumb from "@/components/ui/breadcrumb";
 
 const page = () => {
   return (

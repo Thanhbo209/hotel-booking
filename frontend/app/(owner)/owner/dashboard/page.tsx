@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/ui/breadcrum";
+import Breadcrumb from "@/components/ui/breadcrumb";
 import React from "react";
 
 const page = () => {

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const HotelSchema = new mongoose.Schema(
   {
     ownerId: {
-      type: Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
       index: true,
