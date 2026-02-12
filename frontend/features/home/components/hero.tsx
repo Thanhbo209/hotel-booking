@@ -89,6 +89,7 @@ export const Hero = () => {
                 src="/luxurious-hotel-lobby.jpg"
                 alt="Travel destination"
                 fill
+                sizes="(max-width: 1024px) 60vw, 30vw"
                 className="object-cover"
                 priority
               />
@@ -100,6 +101,7 @@ export const Hero = () => {
                 src="/grand-bella-hotel.jpg"
                 alt="Adventure moment"
                 fill
+                sizes="200"
                 className="object-cover"
               />
             </div>
