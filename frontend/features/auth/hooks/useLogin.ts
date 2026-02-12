@@ -7,7 +7,7 @@ import { useAuthStore } from "@/stores/auth-store";
 export const useLogin = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const setAuth = useAuthStore((s) => s.setAuth);
+  const setAuth = useAuthStore((s) => s.setUser);
 
   const submit = async (data: LoginFormValues) => {
     try {
@@ -15,7 +15,7 @@ export const useLogin = () => {
 
       const res = await signIn(data);
 
-      setAuth(res.user, "");
+      setAuth(res.user);
 
       router.push("/");
       router.refresh(); // optional (để SSR layout sync)
