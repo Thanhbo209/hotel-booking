@@ -26,9 +26,10 @@ export const createHotel = async (req, res) => {
 
 export const updateHotel = async (req, res) => {
   try {
+    const { name, address, city, description, images, amenities } = req.body;
     const hotel = await Hotel.findOneAndUpdate(
       { _id: req.params.id, ownerId: req.user._id },
-      req.body,
+      { name, address, city, description, images, amenities },
       { new: true },
     );
 

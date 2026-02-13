@@ -1,4 +1,5 @@
 import Hotel from "../models/Hotel.js";
+import Room from "../models/Room.js";
 
 export const createRoom = async (req, res) => {
   try {
@@ -54,7 +55,15 @@ export const updateRoom = async (req, res) => {
       return res.status(403).json({ message: "Not your hotel" });
     }
 
-    Object.assign(room, req.body);
+    const { name, type, price, capacity, amenities, description } = req.body;
+    Object.assign(room, {
+      name,
+      type,
+      price,
+      capacity,
+      amenities,
+      description,
+    });
     await room.save();
 
     res.json(room);
