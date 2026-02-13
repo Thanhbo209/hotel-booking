@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getMyHotels } from "../services/hotel.service";
-
+import { Hotel } from "@/types/hotel";
 export const useHotels = () => {
-  const [hotels, setHotels] = useState<[]>([]);
+  const [hotels, setHotels] = useState<Hotel[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchHotels = async () => {

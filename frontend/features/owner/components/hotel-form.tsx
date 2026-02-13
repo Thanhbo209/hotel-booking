@@ -39,8 +39,11 @@ export default function CreateHotelModal() {
   });
 
   const handleSubmit = async () => {
-    await submit(form);
-    setOpen(false);
+    const success = await submit(form);
+    if (success) {
+      setOpen(false);
+      // optionally reset form state here
+    }
   };
 
   return (
@@ -104,7 +107,7 @@ export default function CreateHotelModal() {
               Cancel
             </Button>
             <Button onClick={handleSubmit} disabled={loading}>
-              {loading ? "Createing..." : "Create"}
+              {loading ? "Creating..." : "Create"}
             </Button>
           </div>
         </div>

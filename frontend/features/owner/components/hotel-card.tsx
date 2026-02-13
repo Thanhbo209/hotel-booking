@@ -17,25 +17,7 @@ import {
   Car,
   Wine,
 } from "lucide-react";
-
-interface Hotel {
-  _id: string;
-  name: string;
-  description?: string;
-  address: string;
-  city?: string;
-  rating: number;
-  amenities?: {
-    restaurant?: boolean;
-    swimmingPool?: boolean;
-    gym?: boolean;
-    spa?: boolean;
-    parking?: boolean;
-    bar?: boolean;
-  };
-  createdAt?: string;
-  updatedAt?: string;
-}
+import { Hotel } from "@/types/hotel";
 
 interface HotelCardProps {
   hotel: Hotel;
@@ -62,7 +44,7 @@ export default function HotelCard({ hotel, onClick }: HotelCardProps) {
 
   return (
     <Card
-      className="hover:shadow-lg bg=card transition-shadow cursor-pointer"
+      className="hover:shadow-lg bg-card transition-shadow cursor-pointer"
       onClick={() => onClick?.(hotel._id)}
     >
       <CardHeader>

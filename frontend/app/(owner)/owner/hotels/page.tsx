@@ -5,9 +5,11 @@ import CreateHotelModal from "@/features/owner/components/hotel-form";
 import { useHotels } from "@/features/owner/hooks/useHotels";
 import HotelCardSkeleton from "@/features/owner/components/hotels-skeleton";
 import Breadcrumb from "@/components/ui/breadcrumb";
+import { useRouter } from "next/navigation";
 
 export default function HotelsPage() {
-  const { hotels, loading } = useHotels();
+  const router = useRouter();
+  const { hotels, loading, refetch } = useHotels();
 
   return (
     <div className="p-6 space-y-6">
@@ -29,18 +31,19 @@ export default function HotelsPage() {
       {/* Empty state */}
       {!loading && hotels.length === 0 && (
         <div className="text-center py-20 text-muted-foreground">
-          Bạn chưa có khách sạn nào.
+          No Hotel Yet.
         </div>
       )}
 
-      {/* Hotel List */}
+      {/* Hotel list */}
       {!loading && hotels.length > 0 && (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {hotels.map((hotel) => (
             <HotelCard
               key={hotel._id}
               hotel={hotel}
-              onClick={(id) => console.log("Click hotel:", id)}
+              // ✅ replace console.log with router navigation
+              onClick={(id) => router.push(`/owner/hotels/${id}`)}
             />
           ))}
         </div>

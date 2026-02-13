@@ -9,11 +9,13 @@ export const useCreateHotel = () => {
   const submit = async (payload: CreateHotelPayload) => {
     try {
       setLoading(true);
-      await createHotel(payload);
-      toast.success("Tạo hotel thành công");
+      const result = await createHotel(payload);
+      toast.success("Create hotel successfully");
+      return result;
     } catch (err: any) {
       console.error(err);
-      toast.error(err?.message || "Tạo hotel thất bại");
+      toast.error(err?.message || "Failed to create hotel");
+      return null;
     } finally {
       setLoading(false);
     }
