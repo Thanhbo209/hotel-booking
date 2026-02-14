@@ -13,9 +13,9 @@ export const HotelList = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(6)].map((_, idx) => (
             <div key={idx} className="animate-pulse">
-              <div className="aspect-4/3  rounded-2xl mb-4" />
-              <div className="h-6  rounded w-3/4 mb-2" />
-              <div className="h-4  rounded w-1/2" />
+              <div className="aspect-4/3 bg-muted rounded-2xl mb-4" />
+              <div className="h-6 bg-muted rounded w-3/4 mb-2" />
+              <div className="h-4 bg-muted rounded w-1/2" />
             </div>
           ))}
         </div>
@@ -125,7 +125,7 @@ export const HotelList = () => {
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
 
                 {/* Rating Badge */}
-                {hotel.rating && (
+                {hotel.rating != null && hotel.rating > 0 && (
                   <div className="absolute top-4 right-4">
                     <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />

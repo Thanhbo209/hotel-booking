@@ -54,7 +54,7 @@ export default function CreateHotelModal({
   const { submit: updateSubmit, loading: updating } = useUpdateHotel();
   const [form, setForm] = useState<CreateHotelPayload>(EMPTY_FORM);
   const [imageInput, setImageInput] = useState("");
-
+  const busy = loading || updating;
   /* ---------------- SYNC FORM ---------------- */
   useEffect(() => {
     if (!open) return;
@@ -328,7 +328,7 @@ export default function CreateHotelModal({
                 <Button
                   variant="outline"
                   onClick={() => setOpen(false)}
-                  disabled={loading}
+                  disabled={busy}
                   className="min-w-24"
                 >
                   Cancel
@@ -336,12 +336,10 @@ export default function CreateHotelModal({
 
                 <Button
                   onClick={handleSubmit}
-                  disabled={
-                    loading || !form.name || !form.address || !form.city
-                  }
+                  disabled={busy || !form.name || !form.address || !form.city}
                   className="min-w-24"
                 >
-                  {loading ? (
+                  {busy ? (
                     <>
                       <span className="animate-spin mr-2">⏳</span>
                       {mode === "edit" ? "Updating..." : "Creating..."}
