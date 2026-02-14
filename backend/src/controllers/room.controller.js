@@ -92,7 +92,8 @@ export const toggleRoomStatus = async (req, res) => {
       return res.status(403).json({ message: "Not your hotel" });
     }
 
-    room.status = room.status === "ACTIVE" ? "INACTIVE" : "ACTIVE";
+    room.status =
+      req.body.status ?? (room.status === "ACTIVE" ? "INACTIVE" : "ACTIVE");
     await room.save();
 
     return res.json(room);

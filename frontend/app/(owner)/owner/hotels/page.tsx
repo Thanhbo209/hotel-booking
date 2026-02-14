@@ -9,14 +9,14 @@ import { useRouter } from "next/navigation";
 
 export default function HotelsPage() {
   const router = useRouter();
-  const { hotels, loading } = useHotels();
+  const { hotels, loading, refetch } = useHotels();
 
   return (
     <div className="p-6 space-y-6">
       <Breadcrumb />
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-semibold">My Hotels</h2>
-        <CreateHotelModal />
+        <CreateHotelModal onSuccess={refetch} />
       </div>
 
       {/* Loading */}

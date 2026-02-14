@@ -39,17 +39,21 @@ export default function HotelDetailPage() {
   };
 
   const handleSubmit = async (payload: CreateRoomPayload) => {
-    if (editingRoom) {
-      await updateRoom(editingRoom._id, payload);
-    } else {
-      await createRoom({
-        ...payload,
-        hotelId,
-      });
-    }
+    try {
+      if (editingRoom) {
+        await updateRoom(editingRoom._id, payload);
+      } else {
+        await createRoom({
+          ...payload,
+          hotelId,
+        });
+      }
 
-    handleCloseModal();
-    refetch();
+      handleCloseModal();
+      refetch();
+    } catch (error) {
+      console.error("Save room failed:", error);
+    }
   };
 
   return (
@@ -88,8 +92,12 @@ export default function HotelDetailPage() {
                 setOpen(true);
               }}
               onToggleStatus={async (roomId, status) => {
-                await toggleRoomStatus(roomId, status);
-                refetch();
+                try {
+                  await toggleRoomStatus(roomId, status);
+                  refetch();
+                } catch (err) {
+                  console.error("Toggle status failed:", err);
+                }
               }}
             />
           ))}

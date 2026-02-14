@@ -18,6 +18,10 @@ export const useRooms = (hotelId: string) => {
       const res = await getRoomsByHotel(hotelId, filters);
       setRooms(res.rooms);
       setTotal(res.total);
+    } catch (err) {
+      console.error("Fetch rooms error:", err);
+      setRooms([]);
+      setTotal(0);
     } finally {
       setLoading(false);
     }

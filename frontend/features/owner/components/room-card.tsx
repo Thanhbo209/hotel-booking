@@ -54,7 +54,10 @@ export default function RoomCard({ room, onToggleStatus, onEdit }: Props) {
       <CardContent className="space-y-3">
         {/* Price */}
         <div className="font-semibold text-base">
-          ${room.pricePerNight.toLocaleString()} / night
+          <span className="text-primary/90">
+            ${room.pricePerNight.toLocaleString()}
+          </span>{" "}
+          / night
         </div>
 
         {/* Total rooms */}

@@ -79,6 +79,25 @@ export default function CreateRoomModal({
         },
         images: initialData.images ?? [],
       });
+    } else {
+      setForm({
+        hotelId: "",
+        name: "",
+        roomType: "SINGLE",
+        pricePerNight: 0,
+        capacity: 1,
+        totalRooms: 1,
+        status: "ACTIVE",
+        amenities: {
+          wifi: false,
+          airConditioner: false,
+          tv: false,
+          minibar: false,
+          balcony: false,
+          bedType: "",
+        },
+        images: [],
+      });
     }
   }, [initialData]);
 
