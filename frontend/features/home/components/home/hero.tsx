@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { STATS } from "@/features/home/components/home/data/home-data";
 import SearchFilter from "@/features/home/components/home/search-filter";
-import { MapPin, Play } from "lucide-react";
+import { Github, MapPin, Play } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Hero = () => {
   return (
@@ -51,8 +52,14 @@ export const Hero = () => {
                 variant="outline"
                 className="border-2 border-border hover:border-border/80 hover:bg-primary/20 px-8 py-6 text-lg rounded-md transition-all duration-300 group"
               >
-                <Play className="w-5 h-5 mr-2 group-hover:text-primary transition-colors" />
-                Watch Demo
+                <Link
+                  className="flex justify-center items-center"
+                  href="https://github.com/Thanhbo209/hotel-booking"
+                  target="_blank"
+                >
+                  <Github className="w-10 h-10 mr-2 group-hover:text-primary rounded-full transition-colors" />
+                  GitHub
+                </Link>
               </Button>
             </div>
 
