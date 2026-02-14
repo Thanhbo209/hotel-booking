@@ -11,6 +11,10 @@ const HotelSchema = new mongoose.Schema(
     name: { type: String, required: true },
     description: String,
     address: { type: String, required: true },
+    images: {
+      type: [String],
+      default: [],
+    },
     city: { type: String, index: true },
     rating: { type: Number, default: 0 },
     amenities: {

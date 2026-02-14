@@ -1,18 +1,20 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-interface Props {
-  value: Record<string, boolean>;
-  onChange: (val: Record<string, boolean>) => void;
-}
-
-const AMENITIES = [
+export const AMENITIES = [
   { key: "wifi", label: "WiFi" },
   { key: "parking", label: "Parking" },
   { key: "pool", label: "Swimming Pool" },
   { key: "restaurant", label: "Restaurant" },
   { key: "gym", label: "Gym" },
-];
+] as const;
+
+type AmenityKey = (typeof AMENITIES)[number]["key"];
+
+interface Props {
+  value: Record<AmenityKey, boolean>;
+  onChange: (val: Record<AmenityKey, boolean>) => void;
+}
 
 export default function AmenitiesField({ value, onChange }: Props) {
   return (

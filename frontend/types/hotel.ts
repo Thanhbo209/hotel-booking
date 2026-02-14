@@ -16,19 +16,20 @@ export interface Hotel {
   createdAt?: string;
   updatedAt?: string;
 }
+export interface Amenities {
+  wifi: boolean;
+  parking: boolean;
+  pool: boolean;
+  restaurant: boolean;
+  gym: boolean;
+}
 
 export interface CreateHotelPayload {
   name: string;
   address: string;
   city: string;
   description?: string;
-  amenities: {
-    wifi: boolean;
-    parking: boolean;
-    pool: boolean;
-    restaurant: boolean;
-    gym: boolean;
-  };
+  amenities: Amenities;
   available: boolean;
   images: string[];
 }
