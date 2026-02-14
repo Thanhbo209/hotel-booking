@@ -10,10 +10,43 @@ export const getMyHotels = async (req, res) => {
   }
 };
 
+export const getPublicHotels = async (req, res) => {
+  try {
+    const hotels = await Hotel.find({})
+      .select("name images city rating")
+      .sort({ rating: -1 })
+      .lean();
+
+    const normalized = hotels.map((h) => ({
+      ...h,
+      image:
+        Array.isArray(h.images) && h.images.length > 0 ? h.images[0] : null,
+    }));
+
+    res.json(normalized);
+  } catch (error) {
+    res.status(500).json({ message: "Get public hotels failed" });
+  }
+};
+
 export const createHotel = async (req, res) => {
   try {
+    const {
+      name,
+      address,
+      city,
+      description,
+      images = [],
+      amenities,
+    } = req.body;
+
     const hotel = await Hotel.create({
-      ...req.body,
+      name,
+      address,
+      city,
+      description,
+      images,
+      amenities,
       ownerId: req.user._id,
     });
 

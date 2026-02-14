@@ -18,7 +18,7 @@ import {
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
-import { LOCATION_BY_REGION } from "@/features/home/components/data/home-data";
+import { LOCATION_BY_REGION } from "@/features/home/components/home/data/home-data";
 
 const SearchFilter = () => {
   const [location, setLocation] = useState("");

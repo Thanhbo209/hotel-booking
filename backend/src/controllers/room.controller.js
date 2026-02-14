@@ -19,6 +19,7 @@ export const createRoom = async (req, res) => {
     return res.status(500).json({ message: "Create room failed" });
   }
 };
+
 export const getRoomsByHotel = async (req, res) => {
   try {
     const hotel = await Hotel.findOne({

@@ -18,6 +18,8 @@ import AmenitiesField from "@/features/owner/components/amenities-checkbox";
 import { useCreateHotel } from "../hooks/useCreateHotel";
 import { Plus } from "lucide-react";
 
+import { Amenities, CreateHotelPayload } from "@/types/hotel";
+
 interface Props {
   onSuccess?: () => void;
 }
@@ -25,28 +27,57 @@ interface Props {
 export default function CreateHotelModal({ onSuccess }: Props) {
   const { submit, loading } = useCreateHotel();
   const [open, setOpen] = useState(false);
+  const [imageInput, setImageInput] = useState("");
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<CreateHotelPayload>({
     name: "",
     address: "",
     city: "",
     description: "",
     available: true,
     amenities: {
-      wifi: false,
-      parking: false,
-      pool: false,
       restaurant: false,
+      swimmingPool: false,
       gym: false,
+      spa: false,
+      parking: false,
+      bar: false,
     },
     images: [],
   });
 
   const handleSubmit = async () => {
-    const success = await submit(form);
+    let payload = { ...form };
+
+    if (imageInput.trim()) {
+      payload = {
+        ...payload,
+        images: [...payload.images, imageInput.trim()],
+      };
+    }
+
+    const success = await submit(payload);
     if (success) {
       onSuccess?.();
       setOpen(false);
+      setImageInput("");
+
+      setForm({
+        name: "",
+        address: "",
+        city: "",
+        description: "",
+        available: true,
+        amenities: {
+          restaurant: false,
+          swimmingPool: false,
+          gym: false,
+          spa: false,
+          parking: false,
+          bar: false,
+        },
+        images: [],
+      });
     }
   };
 
@@ -92,7 +123,9 @@ export default function CreateHotelModal({ onSuccess }: Props) {
             <Label>Amenities</Label>
             <AmenitiesField
               value={form.amenities}
-              onChange={(amenities: any) => setForm({ ...form, amenities })}
+              onChange={(amenities: Amenities) =>
+                setForm({ ...form, amenities })
+              }
             />
           </div>
 
@@ -104,6 +137,56 @@ export default function CreateHotelModal({ onSuccess }: Props) {
               }
             />
             <Label>Available</Label>
+          </div>
+
+          {/* Images */}
+          <div className="space-y-2">
+            <Label>Hotel Images (URLs)</Label>
+
+            <div className="flex gap-2">
+              <Input
+                placeholder="https://example.com/image.jpg"
+                value={imageInput}
+                onChange={(e) => setImageInput(e.target.value)}
+              />
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => {
+                  if (!imageInput.trim()) return;
+                  setForm({
+                    ...form,
+                    images: [...form.images, imageInput.trim()],
+                  });
+                  setImageInput("");
+                }}
+              >
+                Add
+              </Button>
+            </div>
+
+            {form.images.length > 0 && (
+              <ul className="space-y-1 text-sm">
+                {form.images.map((img, index) => (
+                  <li key={index} className="flex items-center justify-between">
+                    <span className="truncate">{img}</span>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() =>
+                        setForm({
+                          ...form,
+                          images: form.images.filter((_, i) => i !== index),
+                        })
+                      }
+                    >
+                      Remove
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div className="flex justify-end gap-2 pt-4">

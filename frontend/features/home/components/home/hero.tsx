@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { STATS } from "@/features/home/components/data/home-data";
-import SearchFilter from "@/features/home/components/search-filter";
+import { STATS } from "@/features/home/components/home/data/home-data";
+import SearchFilter from "@/features/home/components/home/search-filter";
 import { MapPin, Play } from "lucide-react";
 import Image from "next/image";
 

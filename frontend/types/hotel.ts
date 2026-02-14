@@ -5,16 +5,21 @@ export interface Hotel {
   address: string;
   city?: string;
   rating: number;
-  amenities?: {
-    restaurant?: boolean;
-    swimmingPool?: boolean;
-    gym?: boolean;
-    spa?: boolean;
-    parking?: boolean;
-    bar?: boolean;
-  };
+  images?: string[];
+
+  amenities?: Amenities;
+
   createdAt?: string;
   updatedAt?: string;
+}
+
+export interface Amenities {
+  restaurant: boolean;
+  swimmingPool: boolean;
+  gym: boolean;
+  spa: boolean;
+  parking: boolean;
+  bar?: boolean;
 }
 
 export interface CreateHotelPayload {
@@ -22,13 +27,7 @@ export interface CreateHotelPayload {
   address: string;
   city: string;
   description?: string;
-  amenities: {
-    wifi: boolean;
-    parking: boolean;
-    pool: boolean;
-    restaurant: boolean;
-    gym: boolean;
-  };
+  amenities: Amenities;
   available: boolean;
   images: string[];
 }
