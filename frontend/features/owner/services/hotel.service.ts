@@ -13,3 +13,18 @@ export const getMyHotels = async () => {
     method: "GET",
   });
 };
+
+/* UPDATE */
+export const updateHotel = (id: string, payload: CreateHotelPayload) => {
+  return fetcher(`/owner/hotels/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+};
+
+/* DELETE */
+export const deleteHotel = (id: string) => {
+  return fetcher(`/owner/hotels/${id}`, {
+    method: "DELETE",
+  });
+};

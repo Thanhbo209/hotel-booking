@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   MapPin,
   Star,
@@ -16,12 +17,16 @@ import {
   Sparkles,
   Car,
   Wine,
+  Pencil,
+  Trash2,
 } from "lucide-react";
 import { Hotel } from "@/types/hotel";
 
 interface HotelCardProps {
   hotel: Hotel;
   onClick?: (hotelId: string) => void;
+  onEdit?: (hotel: Hotel) => void;
+  onDelete?: (hotelId: string) => void;
 }
 
 const amenityConfig = {
@@ -33,10 +38,13 @@ const amenityConfig = {
   bar: { icon: Wine, label: "Bar" },
 };
 
-export default function HotelCard({ hotel, onClick }: HotelCardProps) {
-  if (!hotel) {
-    return null;
-  }
+export default function HotelCard({
+  hotel,
+  onClick,
+  onEdit,
+  onDelete,
+}: HotelCardProps) {
+  if (!hotel) return null;
 
   const activeAmenities = Object.entries(hotel.amenities || {})
     .filter(([_, value]) => value === true)
@@ -44,9 +52,38 @@ export default function HotelCard({ hotel, onClick }: HotelCardProps) {
 
   return (
     <Card
-      className="hover:shadow-lg bg-card transition-shadow cursor-pointer"
+      className="hover:shadow-lg bg-card transition-shadow cursor-pointer relative"
       onClick={() => onClick?.(hotel._id)}
     >
+      {/* ACTION BUTTONS */}
+      <div className="absolute bottom-3 right-3 flex gap-2 z-10">
+        {onEdit && (
+          <Button
+            size="icon"
+            variant="secondary"
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit(hotel);
+            }}
+          >
+            <Pencil className="w-4 h-4" />
+          </Button>
+        )}
+
+        {onDelete && (
+          <Button
+            size="icon"
+            variant="destructive"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(hotel._id);
+            }}
+          >
+            <Trash2 className="w-4 h-4" />
+          </Button>
+        )}
+      </div>
+
       <CardHeader>
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -74,23 +111,21 @@ export default function HotelCard({ hotel, onClick }: HotelCardProps) {
           </p>
         )}
 
-        {activeAmenities.length > 0 && (
+        {activeAmenities.length > 0 ? (
           <div className="flex flex-wrap gap-2">
-            {activeAmenities.map((amenityKey) => {
-              const amenity = amenityConfig[amenityKey];
+            {activeAmenities.map((key) => {
+              const amenity = amenityConfig[key];
               const Icon = amenity.icon;
 
               return (
-                <Badge key={amenityKey} variant="secondary" className="gap-1">
+                <Badge key={key} variant="secondary" className="gap-1">
                   <Icon className="w-3 h-3" />
                   {amenity.label}
                 </Badge>
               );
             })}
           </div>
-        )}
-
-        {activeAmenities.length === 0 && (
+        ) : (
           <p className="text-xs text-muted-foreground italic">
             No amenities listed
           </p>

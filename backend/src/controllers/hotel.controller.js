@@ -13,7 +13,7 @@ export const getMyHotels = async (req, res) => {
 export const getPublicHotels = async (req, res) => {
   try {
     const hotels = await Hotel.find({})
-      .select("name images city rating")
+      .select("name images address city rating")
       .sort({ rating: -1 })
       .lean();
 
