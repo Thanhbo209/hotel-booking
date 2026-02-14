@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 export default function HotelsPage() {
   const router = useRouter();
-  const { hotels, loading, refetch } = useHotels();
+  const { hotels, loading } = useHotels();
 
   return (
     <div className="p-6 space-y-6">
@@ -42,7 +42,6 @@ export default function HotelsPage() {
             <HotelCard
               key={hotel._id}
               hotel={hotel}
-              // ✅ replace console.log with router navigation
               onClick={(id) => router.push(`/owner/hotels/${id}`)}
             />
           ))}

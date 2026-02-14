@@ -19,7 +19,6 @@ export const createRoom = async (req, res) => {
     return res.status(500).json({ message: "Create room failed" });
   }
 };
-
 export const getRoomsByHotel = async (req, res) => {
   try {
     const hotel = await Hotel.findOne({
@@ -32,7 +31,11 @@ export const getRoomsByHotel = async (req, res) => {
     }
 
     const rooms = await Room.find({ hotelId: hotel._id });
-    res.json(rooms);
+
+    res.json({
+      rooms,
+      total: rooms.length,
+    });
   } catch (error) {
     console.error("Get room error:", error);
     return res.status(500).json({ message: "Get room failed" });

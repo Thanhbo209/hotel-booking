@@ -42,7 +42,6 @@ export default function CreateHotelModal() {
     const success = await submit(form);
     if (success) {
       setOpen(false);
-      // optionally reset form state here
     }
   };
 
