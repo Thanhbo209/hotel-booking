@@ -18,7 +18,11 @@ import AmenitiesField from "@/features/owner/components/amenities-checkbox";
 import { useCreateHotel } from "../hooks/useCreateHotel";
 import { Plus } from "lucide-react";
 
-export default function CreateHotelModal() {
+interface Props {
+  onSuccess?: () => void;
+}
+
+export default function CreateHotelModal({ onSuccess }: Props) {
   const { submit, loading } = useCreateHotel();
   const [open, setOpen] = useState(false);
 
@@ -41,8 +45,8 @@ export default function CreateHotelModal() {
   const handleSubmit = async () => {
     const success = await submit(form);
     if (success) {
+      onSuccess?.();
       setOpen(false);
-      // optionally reset form state here
     }
   };
 

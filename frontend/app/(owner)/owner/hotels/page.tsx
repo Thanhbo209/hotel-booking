@@ -16,7 +16,7 @@ export default function HotelsPage() {
       <Breadcrumb />
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-semibold">My Hotels</h2>
-        <CreateHotelModal />
+        <CreateHotelModal onSuccess={refetch} />
       </div>
 
       {/* Loading */}
@@ -42,7 +42,6 @@ export default function HotelsPage() {
             <HotelCard
               key={hotel._id}
               hotel={hotel}
-              // ✅ replace console.log with router navigation
               onClick={(id) => router.push(`/owner/hotels/${id}`)}
             />
           ))}
