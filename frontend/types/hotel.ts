@@ -19,7 +19,7 @@ export interface Amenities {
   gym: boolean;
   spa: boolean;
   parking: boolean;
-  bar?: boolean; // optional nếu chưa dùng
+  bar?: boolean;
 }
 
 export interface CreateHotelPayload {
