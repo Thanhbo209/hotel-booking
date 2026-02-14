@@ -28,6 +28,14 @@ export interface CreateHotelPayload {
   city: string;
   description?: string;
   amenities: Amenities;
-  available: boolean;
   images: string[];
 }
+
+export const EMPTY_AMENITIES: Amenities = {
+  restaurant: false,
+  swimmingPool: false,
+  gym: false,
+  spa: false,
+  parking: false,
+  bar: false,
+};

@@ -5,6 +5,7 @@ export interface PublicHotel {
   name: string;
   images?: string[]; // mảng ảnh
   city?: string;
+  address?: string;
   rating?: number;
 }
 
