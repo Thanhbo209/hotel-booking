@@ -11,7 +11,9 @@ export const usePublicHotels = () => {
   useEffect(() => {
     getPublicHotels()
       .then(setHotels)
-      .catch((err) => setError(err.message))
+      .catch((err) =>
+        setError(err instanceof Error ? err.message : "Failed to load hotels"),
+      )
       .finally(() => setLoading(false));
   }, []);
 

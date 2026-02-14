@@ -46,15 +46,15 @@ export const HotelList = () => {
               <div className="p-4 space-y-1">
                 <h3 className="font-semibold text-lg">{hotel.name}</h3>
 
-                {hotel.address && (
+                {hotel.city && (
                   <p className="text-sm text-muted-foreground truncate">
-                    {hotel.address}
+                    {hotel.city}
                   </p>
                 )}
 
-                {hotel.minPrice && (
+                {hotel.rating != null && (
                   <p className="pt-2 font-medium text-primary">
-                    From {hotel.minPrice.toLocaleString()}₫ / night
+                    From {hotel.rating.toLocaleString()}₫ / night
                   </p>
                 )}
               </div>

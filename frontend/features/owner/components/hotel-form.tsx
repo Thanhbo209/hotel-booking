@@ -36,11 +36,12 @@ export default function CreateHotelModal({ onSuccess }: Props) {
     description: "",
     available: true,
     amenities: {
-      wifi: false,
-      parking: false,
-      pool: false,
       restaurant: false,
+      swimmingPool: false,
       gym: false,
+      spa: false,
+      parking: false,
+      bar: false,
     },
     images: [],
   });
@@ -48,15 +49,12 @@ export default function CreateHotelModal({ onSuccess }: Props) {
   const handleSubmit = async () => {
     let payload = { ...form };
 
-    // 🔥 auto add imageInput nếu còn
     if (imageInput.trim()) {
       payload = {
         ...payload,
         images: [...payload.images, imageInput.trim()],
       };
     }
-
-    console.log("SUBMIT PAYLOAD:", payload);
 
     const success = await submit(payload);
     if (success) {
@@ -71,11 +69,12 @@ export default function CreateHotelModal({ onSuccess }: Props) {
         description: "",
         available: true,
         amenities: {
-          wifi: false,
-          parking: false,
-          pool: false,
           restaurant: false,
+          swimmingPool: false,
           gym: false,
+          spa: false,
+          parking: false,
+          bar: false,
         },
         images: [],
       });

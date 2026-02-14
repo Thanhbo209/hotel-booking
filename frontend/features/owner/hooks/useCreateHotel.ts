@@ -12,9 +12,16 @@ export const useCreateHotel = () => {
       const result = await createHotel(payload);
       toast.success("Create hotel successfully");
       return result;
-    } catch (err: any) {
-      console.error(err);
-      toast.error(err?.message || "Failed to create hotel");
+    } catch (error: unknown) {
+      console.error(error);
+
+      let message = "Failed to create hotel";
+
+      if (error instanceof Error) {
+        message = error.message;
+      }
+
+      toast.error(message);
       return null;
     } finally {
       setLoading(false);

@@ -1,19 +1,22 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Amenities } from "@/types/hotel";
 
-export const AMENITIES = [
-  { key: "wifi", label: "WiFi" },
-  { key: "parking", label: "Parking" },
-  { key: "pool", label: "Swimming Pool" },
+export const AMENITIES: {
+  key: keyof Amenities;
+  label: string;
+}[] = [
   { key: "restaurant", label: "Restaurant" },
+  { key: "swimmingPool", label: "Swimming Pool" },
   { key: "gym", label: "Gym" },
-] as const;
-
-type AmenityKey = (typeof AMENITIES)[number]["key"];
+  { key: "spa", label: "Spa" },
+  { key: "parking", label: "Parking" },
+  { key: "bar", label: "Bar" },
+];
 
 interface Props {
-  value: Record<AmenityKey, boolean>;
-  onChange: (val: Record<AmenityKey, boolean>) => void;
+  value: Amenities;
+  onChange: (val: Amenities) => void;
 }
 
 export default function AmenitiesField({ value, onChange }: Props) {
