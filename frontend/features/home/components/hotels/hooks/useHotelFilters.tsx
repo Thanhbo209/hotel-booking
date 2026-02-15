@@ -35,8 +35,11 @@ export function useHotelFilters(hotels: PublicHotel[]) {
       }
 
       // Filter by rating
-      if (filters.rating.length > 0 && hotel.rating) {
-        if (!filters.rating.includes(Math.floor(hotel.rating))) {
+      if (filters.rating.length > 0) {
+        if (
+          !hotel.rating ||
+          !filters.rating.includes(Math.floor(hotel.rating))
+        ) {
           return false;
         }
       }
@@ -54,11 +57,11 @@ export function useHotelFilters(hotels: PublicHotel[]) {
 
   // Check if any filters are active
   const hasActiveFilters =
-    filters.city ||
+    !!filters.city ||
     filters.rating.length > 0 ||
     filters.hotelType.length > 0 ||
     filters.amenities.length > 0 ||
-    filters.searchQuery;
+    !!filters.searchQuery;
 
   return {
     filters,

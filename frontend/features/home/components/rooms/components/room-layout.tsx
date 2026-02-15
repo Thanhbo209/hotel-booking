@@ -3,16 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Filter, X } from "lucide-react";
 import { RoomCard } from "@/features/home/components/rooms/components/room-card";
 import { RoomFilters } from "@/features/home/components/rooms/components/room-filter";
+import { Room, RoomFilterState } from "@/types/room";
 
 interface Props {
-  rooms: any[];
-  filters: any;
+  rooms: Room[];
+  filters: RoomFilterState;
   stats: {
     total: number;
     hasActiveFilters: boolean;
   };
   clearFilters: () => void;
-  setFilters: any;
+  setFilters: (filters: RoomFilterState) => void;
 }
 
 const RoomsLayout = ({
@@ -34,13 +35,13 @@ const RoomsLayout = ({
             </h2>
             {stats.hasActiveFilters && (
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 onClick={clearFilters}
                 className="text-destructive"
               >
                 <X className="w-4 h-4 mr-1" />
-                Clear
+                Clear all filters
               </Button>
             )}
           </CardHeader>

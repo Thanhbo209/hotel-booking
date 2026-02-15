@@ -1,5 +1,5 @@
 import { fetcher } from "@/lib/fetcher";
-import { Room } from "@/types/room";
+import { PublicRoom } from "@/types/hotel";
 
 export interface GetRoomsParams {
   hotelId?: string;
@@ -11,7 +11,8 @@ export interface GetRoomsParams {
 
 export const getPublicRooms = async (
   params?: GetRoomsParams,
-): Promise<Room[]> => {
+  signal?: AbortSignal,
+): Promise<PublicRoom[]> => {
   const query = new URLSearchParams();
 
   if (params?.hotelId) query.append("hotelId", params.hotelId);
@@ -25,8 +26,8 @@ export const getPublicRooms = async (
 
   const res = await fetcher(url, {
     method: "GET",
+    signal,
   });
 
-  // backend đang trả: { rooms, total }
   return res.rooms ?? res;
 };

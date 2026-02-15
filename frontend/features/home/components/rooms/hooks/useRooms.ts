@@ -1,35 +1,49 @@
 import { useEffect, useState } from "react";
-import { Room } from "@/types/room";
+import { PublicRoom } from "@/types/hotel";
 import { getPublicRooms, GetRoomsParams } from "../services/room.service";
 
 export const useRooms = (params?: GetRoomsParams) => {
-  const [rooms, setRooms] = useState<Room[]>([]);
+  const [rooms, setRooms] = useState<PublicRoom[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchRooms = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-
-      const data = await getPublicRooms(params);
-      setRooms(data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load rooms");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchRooms = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        const data = await getPublicRooms(params, controller.signal);
+
+        // 🚨 tránh stale update
+        if (!controller.signal.aborted) {
+          setRooms(data);
+        }
+      } catch (err: any) {
+        if (controller.signal.aborted || err?.name === "AbortError") {
+          return;
+        }
+
+        setError(err instanceof Error ? err.message : "Failed to load rooms");
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
     fetchRooms();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    return () => {
+      controller.abort();
+    };
   }, [JSON.stringify(params)]);
 
   return {
     rooms,
     isLoading,
     error,
-    refetch: fetchRooms,
   };
 };

@@ -6,7 +6,7 @@ const INITIAL_FILTERS: RoomFilterState = {
   roomTypes: [],
   priceRange: [0, 10000000],
   amenities: [],
-  sortBy: "",
+  sortBy: "default",
   checkInDate: "",
   checkOutDate: "",
   searchQuery: "",

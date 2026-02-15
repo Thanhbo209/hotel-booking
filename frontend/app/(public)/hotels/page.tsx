@@ -16,6 +16,7 @@ import {
 import { Search, Filter, X, SlidersHorizontal } from "lucide-react";
 import { HotelCard } from "@/features/home/components/hotels/components/hotels-card";
 import { FilterContent } from "@/features/home/components/hotels/components/filter-content";
+import { PublicHotel } from "@/features/home/services/public-hotel.service";
 
 export default function HotelsPage() {
   const { hotels, loading, error } = usePublicHotels();
@@ -101,7 +102,7 @@ function SearchHeader({
   clearFilters: () => void;
 }) {
   return (
-    <div className="backdrop-blur-xl sticky top-0 z-40 mt-25">
+    <div className="backdrop-blur-xl sticky top-0 z-40 mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center gap-4">
           {/* Search Bar */}
@@ -177,7 +178,7 @@ function FilterSidebar({
               {hasActiveFilters && (
                 <Button
                   onClick={clearFilters}
-                  variant="ghost"
+                  variant="outline"
                   size="sm"
                   className="text-destructive hover:text-primary/80"
                 >
@@ -207,7 +208,7 @@ function HotelsList({
   hasActiveFilters,
   clearFilters,
 }: {
-  hotels: any[];
+  hotels: PublicHotel[];
   hasActiveFilters: boolean;
   clearFilters: () => void;
 }) {
@@ -231,16 +232,14 @@ function HotelsList({
             <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-10 h-10" />
             </div>
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">
-              Not found your filters.
+            <h3 className="text-xl font-semibold  mb-2">
+              We can&apos;t found your hotel.
             </h3>
-            <p className="text-slate-600 mb-4">
+            <p className="text-muted-foreground mb-4">
               Try to change the filter to search
             </p>
             {hasActiveFilters && (
-              <Button onClick={clearFilters} variant="outline">
-                Clear filters
-              </Button>
+              <Button onClick={clearFilters}>Clear filters</Button>
             )}
           </CardContent>
         </Card>

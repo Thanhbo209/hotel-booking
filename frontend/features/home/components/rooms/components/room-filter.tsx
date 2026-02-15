@@ -139,7 +139,7 @@ export function RoomFilters({ filters, setFilters }: RoomFiltersProps) {
                 })
               }
             >
-              {capacity}+ {capacity === 1 ? "" : ""}
+              {capacity}+ {capacity === 1 ? "guest" : "guests"}
             </Badge>
           ))}
         </div>

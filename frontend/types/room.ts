@@ -52,7 +52,7 @@ export interface RoomFilterState {
   roomTypes: RoomType[];
   priceRange: [number, number];
   amenities: string[];
-  sortBy: "default" | "price_asc" | "price_desc" | "capacity_desc";
+  sortBy: "default" | "price_asc" | "price_desc" | "capacity_desc" | "popular";
   checkInDate: string;
   checkOutDate: string;
   searchQuery: string;

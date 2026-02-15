@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { MapPin, Star, Wifi, Waves } from "lucide-react";
+import { useMemo } from "react";
 
 interface HotelCardProps {
   hotel: PublicHotel;
@@ -11,7 +12,13 @@ interface HotelCardProps {
 
 export function HotelCard({ hotel }: HotelCardProps) {
   const mainImage = hotel.images?.[0] || "/placeholder-hotel.jpg";
-  const mockPrice = Math.floor(Math.random() * 3000000 + 500000);
+  const mockPrice = useMemo(() => {
+    let hash = 0;
+    for (let i = 0; i < hotel._id.length; i++) {
+      hash = (hash * 31 + hotel._id.charCodeAt(i)) | 0;
+    }
+    return (Math.abs(hash) % 3000000) + 500000;
+  }, [hotel._id]);
 
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-border group">
@@ -53,17 +60,17 @@ export function HotelCard({ hotel }: HotelCardProps) {
         <div className="flex flex-wrap gap-1.5 mb-4">
           <Badge
             variant="secondary"
-            className="text-xs bg-blue-50 text-primary border-blue-200"
+            className="text-xs bg-card text-muted-foreground border-primary/50"
           >
-            <Wifi className="w-3 h-3 mr-1" />
+            <Wifi className="w-3 h-3 mr-1 text-primary" />
             Wifi
           </Badge>
           <Badge
             variant="secondary"
-            className="text-xs bg-blue-50 text-primary border-blue-200"
+            className="text-xs bg-card text-muted-foreground border-primary/50"
           >
-            <Waves className="w-3 h-3 mr-1" />
-            Bể bơi
+            <Waves className="w-3 h-3 mr-1 text-primary" />
+            Swimming Pool
           </Badge>
         </div>
 
