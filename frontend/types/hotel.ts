@@ -8,7 +8,7 @@ export interface Hotel {
   city?: string;
   rating: number;
   images?: string[];
-
+  minPrice?: number;
   amenities?: Amenities;
 
   createdAt?: string;

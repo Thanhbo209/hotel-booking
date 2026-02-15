@@ -73,20 +73,20 @@ export function RoomCard({ room, checkInDate, checkOutDate }: RoomCardProps) {
         {/* Image Navigation */}
         {images.length > 1 && (
           <>
-            <button
+            <Button
               onClick={prevImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={nextImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
               aria-label="Next image"
             >
               <ChevronRight className="w-5 h-5" />
-            </button>
+            </Button>
 
             {/* Image Indicators */}
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">

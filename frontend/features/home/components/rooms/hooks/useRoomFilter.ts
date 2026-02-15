@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Room, RoomFilterState, RoomType } from "@/types/room";
+import { Room, RoomFilterState } from "@/types/room";
 
 const INITIAL_FILTERS: RoomFilterState = {
   capacity: null,
@@ -97,7 +97,7 @@ export function useRoomFilters(rooms: Room[]) {
     filters.amenities.length > 0 ||
     filters.priceRange[0] !== 0 ||
     filters.priceRange[1] !== 10000000 ||
-    filters.sortBy !== "" ||
+    filters.sortBy !== "default" ||
     filters.searchQuery !== "";
 
   return {
