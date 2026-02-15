@@ -190,7 +190,7 @@ export default function CreateHotelModal({
                   {form.images.map((img, index) => (
                     <div
                       key={index}
-                      className="group relative aspect-4/3 rounded-lg overflow-hidden border-2 border-border hover:border-border-/20 transition-colors "
+                      className="group relative aspect-4/3 rounded-lg overflow-hidden border-2 border-border hover:border-border/20 transition-colors"
                     >
                       {/* Image */}
                       <img

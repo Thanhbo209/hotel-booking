@@ -111,7 +111,7 @@ export function HotelCard({ hotel }: HotelCardProps) {
 
         <div className="flex items-end justify-between">
           <div>
-            {hotel.minPrice ? (
+            {hotel.minPrice != null ? (
               <>
                 <p className="text-xs text-muted-foreground mb-0.5">From</p>
                 <p className="text-xl font-bold text-primary">
