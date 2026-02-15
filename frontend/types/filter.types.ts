@@ -1,12 +1,17 @@
+import { AmenityKey } from "@/types/hotel-amenities.types";
+
 export interface FilterState {
   city: string;
   priceRange: [number, number];
   rating: number[];
-  hotelType: string[];
-  amenities: string[];
-  guests: number;
-  rooms: number;
-  checkIn: string;
-  checkOut: string;
+  amenities: AmenityKey[];
   searchQuery: string;
 }
+
+export const INITIAL_FILTERS: FilterState = {
+  city: "",
+  priceRange: [0, 10_000_000],
+  rating: [],
+  amenities: [],
+  searchQuery: "",
+};

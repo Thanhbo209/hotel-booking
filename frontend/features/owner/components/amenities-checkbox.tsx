@@ -1,19 +1,27 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Amenities } from "@/types/hotel";
-
+import { AmenityKey } from "@/types/hotel-amenities.types";
+import {
+  Utensils,
+  Waves,
+  Dumbbell,
+  Sparkles,
+  ParkingCircle,
+  Wine,
+} from "lucide-react";
 export const AMENITIES: {
-  key: keyof Amenities;
+  key: AmenityKey;
   label: string;
+  Icon: React.ElementType;
 }[] = [
-  { key: "restaurant", label: "Restaurant" },
-  { key: "swimmingPool", label: "Swimming Pool" },
-  { key: "gym", label: "Gym" },
-  { key: "spa", label: "Spa" },
-  { key: "parking", label: "Parking" },
-  { key: "bar", label: "Bar" },
+  { key: "restaurant", label: "Restaurant", Icon: Utensils },
+  { key: "swimmingPool", label: "Swimming Pool", Icon: Waves },
+  { key: "gym", label: "Gym", Icon: Dumbbell },
+  { key: "spa", label: "Spa", Icon: Sparkles },
+  { key: "parking", label: "Parking", Icon: ParkingCircle },
+  { key: "bar", label: "Bar", Icon: Wine },
 ];
-
 interface Props {
   value: Amenities;
   onChange: (val: Amenities) => void;

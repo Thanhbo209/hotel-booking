@@ -55,6 +55,11 @@ export const getPublicHotels = async (req, res) => {
 
     const normalized = hotels.map((h) => ({
       ...h,
+      amenities: Array.isArray(h.amenities)
+        ? h.amenities
+        : h.amenities
+          ? Object.keys(h.amenities).filter((k) => h.amenities[k])
+          : [],
       image:
         Array.isArray(h.images) && h.images.length > 0 ? h.images[0] : null,
     }));

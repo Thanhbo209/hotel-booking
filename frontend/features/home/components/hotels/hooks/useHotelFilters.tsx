@@ -1,27 +1,13 @@
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import { PublicHotel } from "@/features/home/services/public-hotel.service";
-import { FilterState } from "@/types/filter.types";
-
-const INITIAL_FILTERS: FilterState = {
-  city: "",
-  priceRange: [0, 10000000],
-  rating: [],
-  hotelType: [],
-  amenities: [],
-  guests: 2,
-  rooms: 1,
-  checkIn: "",
-  checkOut: "",
-  searchQuery: "",
-};
+import { FilterState, INITIAL_FILTERS } from "@/types/filter.types";
 
 export function useHotelFilters(hotels: PublicHotel[]) {
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
 
-  // Filter hotels based on current filters
   const filteredHotels = useMemo(() => {
     return hotels.filter((hotel) => {
-      // Search by name
+      // 🔍 Search
       if (
         filters.searchQuery &&
         !hotel.name.toLowerCase().includes(filters.searchQuery.toLowerCase())
@@ -29,39 +15,46 @@ export function useHotelFilters(hotels: PublicHotel[]) {
         return false;
       }
 
-      // Filter by city
+      // 📍 City
       if (filters.city && hotel.city !== filters.city) {
         return false;
       }
 
-      // Filter by rating
-      if (filters.rating.length > 0) {
-        if (
-          !hotel.rating ||
-          !filters.rating.includes(Math.floor(hotel.rating))
-        ) {
+      // ⭐ Rating (>=) – an toàn với rating = 0 | undefined
+      if (filters.rating.length) {
+        const rating = hotel.rating ?? 0;
+        if (!filters.rating.some((r) => rating >= r)) {
           return false;
         }
       }
 
-      // TODO: Add logic for price, hotel type, amenities filtering when data is available
+      // 💰 Price – chỉ filter khi hotel có price
+      const [min, max] = filters.priceRange;
+      if (hotel.minPrice != null) {
+        if (hotel.minPrice < min || hotel.minPrice > max) {
+          return false;
+        }
+      }
+
+      if (filters.amenities.length) {
+        const hasAll = filters.amenities.every((key) =>
+          hotel.amenities.includes(key),
+        );
+
+        if (!hasAll) return false;
+      }
 
       return true;
     });
   }, [hotels, filters]);
 
-  // Clear all filters
-  const clearFilters = () => {
-    setFilters(INITIAL_FILTERS);
-  };
+  const clearFilters = () => setFilters(INITIAL_FILTERS);
 
-  // Check if any filters are active
   const hasActiveFilters =
-    !!filters.city ||
+    Boolean(filters.city) ||
+    Boolean(filters.searchQuery) ||
     filters.rating.length > 0 ||
-    filters.hotelType.length > 0 ||
-    filters.amenities.length > 0 ||
-    !!filters.searchQuery;
+    filters.amenities.length > 0;
 
   return {
     filters,
