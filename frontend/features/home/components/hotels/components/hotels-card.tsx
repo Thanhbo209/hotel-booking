@@ -3,52 +3,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import {
-  MapPin,
-  Star,
-  Wifi,
-  Waves,
-  Dumbbell,
-  Utensils,
-  Car,
-  Martini,
-} from "lucide-react";
+import { MapPin, Star } from "lucide-react";
+import { AMENITIES } from "@/features/owner/components/amenities-checkbox";
 
 interface HotelCardProps {
   hotel: PublicHotel;
 }
-const amenityConfig = [
-  {
-    key: "restaurant",
-    label: "Restaurant",
-    icon: Utensils,
-  },
-  {
-    key: "swimmingPool",
-    label: "Swimming Pool",
-    icon: Waves,
-  },
-  {
-    key: "gym",
-    label: "Gym",
-    icon: Dumbbell,
-  },
-  {
-    key: "spa",
-    label: "Spa",
-    icon: Wifi, // đổi icon nếu muốn
-  },
-  {
-    key: "parking",
-    label: "Parking",
-    icon: Car,
-  },
-  {
-    key: "bar",
-    label: "Bar",
-    icon: Martini,
-  },
-];
 
 export function HotelCard({ hotel }: HotelCardProps) {
   const mainImage = hotel.images?.[0] || "/placeholder-hotel.jpg";
@@ -89,20 +49,15 @@ export function HotelCard({ hotel }: HotelCardProps) {
           </p>
         )}
 
-        {/*  amenities */}
-        {hotel.amenities && (
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {amenityConfig.map(({ key, label, icon: Icon }) =>
-              hotel.amenities?.[key as keyof typeof hotel.amenities] ? (
-                <Badge
-                  key={key}
-                  variant="secondary"
-                  className="text-xs bg-card text-muted-foreground border-primary/50"
-                >
-                  <Icon className="w-3 h-3 mr-1 text-primary" />
+        {Array.isArray(hotel.amenities) && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {AMENITIES.filter((a) => hotel.amenities?.includes(a.key)).map(
+              ({ key, label, Icon }) => (
+                <Badge key={key} variant="outline" className="text-xs">
+                  <Icon className="w-3 h-3 mr-1" />
                   {label}
                 </Badge>
-              ) : null,
+              ),
             )}
           </div>
         )}
