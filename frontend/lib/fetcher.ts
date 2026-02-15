@@ -1,4 +1,3 @@
-// src/lib/fetcher.ts
 export const fetcher = async (url: string, options: RequestInit = {}) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}${url}`, {
     credentials: "include",
@@ -18,11 +17,6 @@ export const fetcher = async (url: string, options: RequestInit = {}) => {
   }
 
   if (!res.ok) {
-    console.error("FETCH ERROR", {
-      url,
-      status: res.status,
-      data,
-    });
     throw new Error(data?.message || `HTTP ${res.status}`);
   }
 

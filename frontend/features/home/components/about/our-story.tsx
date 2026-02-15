@@ -8,12 +8,12 @@ export default function OurStory() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Text Content */}
           <div>
-            <div className="inline-block px-4 py-2 bg-card text-primary rounded-full text-sm font-semibold mb-6">
+            <div className="inline-block border px-4 py-2 bg-card text-primary rounded-full text-sm font-semibold mb-6">
               Our Story
             </div>
 
             <h2 className="text-4xl lg:text-5xl font-bold  mb-6 leading-tight">
-              Started with a simple idea in 2018
+              Started with a simple idea
             </h2>
 
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">

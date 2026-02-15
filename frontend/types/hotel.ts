@@ -1,3 +1,5 @@
+import { Room } from "@/types/room";
+
 export interface Hotel {
   _id: string;
   name: string;
@@ -38,4 +40,14 @@ export const EMPTY_AMENITIES: Amenities = {
   spa: false,
   parking: false,
   bar: false,
+};
+
+export interface PopulatedHotel {
+  _id: string;
+  name: string;
+  city?: string;
+  address?: string;
+}
+export type PublicRoom = Omit<Room, "hotelId"> & {
+  hotelId: PopulatedHotel;
 };

@@ -12,7 +12,7 @@ export default function AboutHero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <div className="text-center max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-sm rounded-full mb-8">
+          <div className="inline-flex bg-card  text-primary border items-center gap-2 px-4 py-2 backdrop-blur-sm rounded-full mb-8">
             <Sparkles className="w-4 h-4" />
             <span className="text-sm font-medium">About Us</span>
           </div>

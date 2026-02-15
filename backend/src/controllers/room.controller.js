@@ -1,6 +1,55 @@
 import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
 
+export const getPublicRooms = async (req, res) => {
+  try {
+    const { hotelId, minPrice, maxPrice, capacity, roomType } = req.query;
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = Math.min(100, parseInt(req.query.limit) || 20);
+    const skip = (page - 1) * limit;
+    const query = {
+      status: "ACTIVE",
+    };
+
+    if (hotelId) {
+      query.hotelId = hotelId;
+    }
+
+    if (capacity) {
+      query.capacity = { $gte: Number(capacity) };
+    }
+
+    if (roomType) {
+      query.roomType = roomType;
+    }
+
+    if (minPrice != null || maxPrice != null) {
+      query.pricePerNight = {};
+      if (minPrice != null) query.pricePerNight.$gte = Number(minPrice);
+      if (maxPrice != null) query.pricePerNight.$lte = Number(maxPrice);
+    }
+
+    const [rooms, total] = await Promise.all([
+      Room.find(query)
+        .populate("hotelId", "name city address")
+        .sort({ pricePerNight: 1 })
+        .skip(skip)
+        .limit(limit),
+      Room.countDocuments(query),
+    ]);
+
+    res.json({
+      rooms,
+      total,
+      page,
+      limit,
+    });
+  } catch (error) {
+    console.error("getPublicRooms error:", error);
+    res.status(500).json({ message: "Get public rooms failed" });
+  }
+};
+
 export const createRoom = async (req, res) => {
   try {
     const hotel = await Hotel.findOne({
