@@ -12,10 +12,46 @@ export const getMyHotels = async (req, res) => {
 
 export const getPublicHotels = async (req, res) => {
   try {
-    const hotels = await Hotel.find({})
-      .select("name images address city rating")
-      .sort({ rating: -1 })
-      .lean();
+    const hotels = await Hotel.aggregate([
+      {
+        $lookup: {
+          from: "rooms",
+          localField: "_id",
+          foreignField: "hotelId",
+          as: "rooms",
+        },
+      },
+      {
+        $addFields: {
+          activeRooms: {
+            $filter: {
+              input: "$rooms",
+              as: "room",
+              cond: { $eq: ["$$room.status", "ACTIVE"] },
+            },
+          },
+        },
+      },
+      {
+        $addFields: {
+          minPrice: { $min: "$activeRooms.pricePerNight" },
+        },
+      },
+      {
+        $project: {
+          name: 1,
+          images: 1,
+          address: 1,
+          city: 1,
+          amenities: 1,
+          rating: 1,
+          minPrice: 1,
+        },
+      },
+      {
+        $sort: { rating: -1 },
+      },
+    ]);
 
     const normalized = hotels.map((h) => ({
       ...h,
@@ -25,6 +61,7 @@ export const getPublicHotels = async (req, res) => {
 
     res.json(normalized);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Get public hotels failed" });
   }
 };

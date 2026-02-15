@@ -132,9 +132,9 @@ export default function CreateHotelModal({
         {/* Content */}
         <div className="flex flex-col lg:flex-row h-[calc(95vh-140px)]">
           {/* ---------------- LEFT: IMAGE PANEL ---------------- */}
-          <div className="lg:w-2/5 border-r flex flex-col bg-gray-50">
+          <div className="lg:w-2/5 border-r flex flex-col">
             {/* Image Header */}
-            <div className="px-6 py-4 border-b bg-white">
+            <div className="px-6 py-4 border-b ">
               <div className="flex items-center justify-between mb-3">
                 <Label className="text-base font-semibold">Hotel Images</Label>
                 <span className="text-sm text-muted-foreground">
@@ -165,7 +165,7 @@ export default function CreateHotelModal({
               </div>
 
               {form.images.length >= MAX_IMAGES && (
-                <p className="text-xs text-amber-600 mt-2">
+                <p className="text-xs text-primary mt-2">
                   Maximum {MAX_IMAGES} images reached
                 </p>
               )}
@@ -175,10 +175,10 @@ export default function CreateHotelModal({
             <ScrollArea className="flex-1 px-6 py-4">
               {form.images.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-64 text-center">
-                  <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mb-4">
-                    <ImagePlus className="w-10 h-10 text-gray-400" />
+                  <div className="w-20 h-20  rounded-full flex items-center justify-center mb-4">
+                    <ImagePlus className="w-10 h-10 text-muted-foreground" />
                   </div>
-                  <p className="text-sm font-medium text-gray-600 mb-1">
+                  <p className="text-sm font-medium text-muted-foreground mb-1">
                     No images yet
                   </p>
                   <p className="text-xs text-muted-foreground">
@@ -190,7 +190,7 @@ export default function CreateHotelModal({
                   {form.images.map((img, index) => (
                     <div
                       key={index}
-                      className="group relative aspect-4/3 rounded-lg overflow-hidden border-2 border-gray-200 hover:border-blue-500 transition-colors bg-white"
+                      className="group relative aspect-4/3 rounded-lg overflow-hidden border-2 border-border hover:border-border-/20 transition-colors "
                     >
                       {/* Image */}
                       <img
@@ -204,7 +204,7 @@ export default function CreateHotelModal({
                       />
 
                       {/* Index Badge */}
-                      <div className="absolute top-2 left-2 w-6 h-6 bg-blue-600 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                      <div className="absolute top-2 left-2 w-6 h-6 bg-primary text-xs font-bold rounded-full flex items-center justify-center">
                         {index + 1}
                       </div>
 
@@ -221,7 +221,7 @@ export default function CreateHotelModal({
 
                       {/* Primary Badge */}
                       {index === 0 && (
-                        <div className="absolute bottom-2 left-2 px-2 py-1 bg-blue-600 text-white text-xs font-semibold rounded">
+                        <div className="absolute bottom-2 left-2 px-2 py-1 bg-primary  text-black text-xs font-semibold rounded">
                           Primary
                         </div>
                       )}
@@ -239,7 +239,7 @@ export default function CreateHotelModal({
                 {/* Hotel Name */}
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-base font-semibold">
-                    Hotel Name <span className="text-red-500">*</span>
+                    Hotel Name <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="name"
@@ -253,7 +253,7 @@ export default function CreateHotelModal({
                 {/* Address */}
                 <div className="space-y-2">
                   <Label htmlFor="address" className="text-base font-semibold">
-                    Address <span className="text-red-500">*</span>
+                    Address <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="address"
@@ -269,7 +269,7 @@ export default function CreateHotelModal({
                 {/* City */}
                 <div className="space-y-2">
                   <Label htmlFor="city" className="text-base font-semibold">
-                    City <span className="text-red-500">*</span>
+                    City <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="city"
@@ -306,7 +306,7 @@ export default function CreateHotelModal({
                 {/* Amenities */}
                 <div className="space-y-3">
                   <Label className="text-base font-semibold">Amenities</Label>
-                  <div className="border rounded-lg p-4 bg-gray-50">
+                  <div className="border rounded-lg p-4 bg-card">
                     <AmenitiesField
                       value={form.amenities}
                       onChange={(amenities: Amenities) =>
@@ -319,9 +319,9 @@ export default function CreateHotelModal({
             </ScrollArea>
 
             {/* ACTION BUTTONS */}
-            <div className="px-6 py-4 border-t bg-white flex justify-between items-center">
+            <div className="px-6 py-4 border-t  flex justify-between items-center">
               <p className="text-sm text-muted-foreground">
-                <span className="text-red-500">*</span> Required fields
+                <span className="text-destructive">*</span> Required fields
               </p>
 
               <div className="flex gap-3">

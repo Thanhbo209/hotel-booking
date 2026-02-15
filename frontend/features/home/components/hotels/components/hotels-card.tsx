@@ -3,22 +3,55 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { MapPin, Star, Wifi, Waves } from "lucide-react";
-import { useMemo } from "react";
+import {
+  MapPin,
+  Star,
+  Wifi,
+  Waves,
+  Dumbbell,
+  Utensils,
+  Car,
+  Martini,
+} from "lucide-react";
 
 interface HotelCardProps {
   hotel: PublicHotel;
 }
+const amenityConfig = [
+  {
+    key: "restaurant",
+    label: "Restaurant",
+    icon: Utensils,
+  },
+  {
+    key: "swimmingPool",
+    label: "Swimming Pool",
+    icon: Waves,
+  },
+  {
+    key: "gym",
+    label: "Gym",
+    icon: Dumbbell,
+  },
+  {
+    key: "spa",
+    label: "Spa",
+    icon: Wifi, // đổi icon nếu muốn
+  },
+  {
+    key: "parking",
+    label: "Parking",
+    icon: Car,
+  },
+  {
+    key: "bar",
+    label: "Bar",
+    icon: Martini,
+  },
+];
 
 export function HotelCard({ hotel }: HotelCardProps) {
   const mainImage = hotel.images?.[0] || "/placeholder-hotel.jpg";
-  const mockPrice = useMemo(() => {
-    let hash = 0;
-    for (let i = 0; i < hotel._id.length; i++) {
-      hash = (hash * 31 + hotel._id.charCodeAt(i)) | 0;
-    }
-    return (Math.abs(hash) % 3000000) + 500000;
-  }, [hotel._id]);
 
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-border group">
@@ -28,7 +61,7 @@ export function HotelCard({ hotel }: HotelCardProps) {
           alt={hotel.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {hotel.rating && (
           <Badge className="absolute top-3 right-3 bg-primary hover:bg-white shadow-lg backdrop-blur-sm">
@@ -56,34 +89,46 @@ export function HotelCard({ hotel }: HotelCardProps) {
           </p>
         )}
 
-        {/* Mock amenities */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          <Badge
-            variant="secondary"
-            className="text-xs bg-card text-muted-foreground border-primary/50"
-          >
-            <Wifi className="w-3 h-3 mr-1 text-primary" />
-            Wifi
-          </Badge>
-          <Badge
-            variant="secondary"
-            className="text-xs bg-card text-muted-foreground border-primary/50"
-          >
-            <Waves className="w-3 h-3 mr-1 text-primary" />
-            Swimming Pool
-          </Badge>
-        </div>
+        {/*  amenities */}
+        {hotel.amenities && (
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {amenityConfig.map(({ key, label, icon: Icon }) =>
+              hotel.amenities?.[key as keyof typeof hotel.amenities] ? (
+                <Badge
+                  key={key}
+                  variant="secondary"
+                  className="text-xs bg-card text-muted-foreground border-primary/50"
+                >
+                  <Icon className="w-3 h-3 mr-1 text-primary" />
+                  {label}
+                </Badge>
+              ) : null,
+            )}
+          </div>
+        )}
 
         <Separator className="mb-4" />
 
         <div className="flex items-end justify-between">
           <div>
-            <p className="text-xs text-muted-foreground mb-0.5">From</p>
-            <p className="text-xl font-bold text-primary">
-              {mockPrice.toLocaleString("vi-VN")}đ
-            </p>
-            <p className="text-xs text-muted-foreground">/ night</p>
+            {hotel.minPrice ? (
+              <>
+                <p className="text-xs text-muted-foreground mb-0.5">From</p>
+                <p className="text-xl font-bold text-primary">
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(hotel.minPrice)}
+                </p>
+                <p className="text-xs text-muted-foreground">/ night</p>
+              </>
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                No available rooms
+              </p>
+            )}
           </div>
+
           <Button className="shadow-md shadow-blue-600/20">Book</Button>
         </div>
       </CardContent>

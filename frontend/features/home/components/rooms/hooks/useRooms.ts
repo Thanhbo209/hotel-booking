@@ -17,7 +17,6 @@ export const useRooms = (params?: GetRoomsParams) => {
 
         const data = await getPublicRooms(params, controller.signal);
 
-        // 🚨 tránh stale update
         if (!controller.signal.aborted) {
           setRooms(data);
         }
