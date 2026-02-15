@@ -45,3 +45,15 @@ export interface CreateRoomPayload {
   amenities: RoomAmenities;
   images: string[];
 }
+
+// Filter state for UI
+export interface RoomFilterState {
+  capacity: number | null;
+  roomTypes: RoomType[];
+  priceRange: [number, number];
+  amenities: string[];
+  sortBy: "default" | "price_asc" | "price_desc" | "capacity_desc";
+  checkInDate: string;
+  checkOutDate: string;
+  searchQuery: string;
+}

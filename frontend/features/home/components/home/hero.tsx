@@ -91,7 +91,7 @@ export const Hero = () => {
           {/* Right Content - Images */}
           <div className="relative h-125 lg:h-150">
             {/* Main Image */}
-            <div className="absolute top-0 right-0 w-[60%] h-[60%] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-[60%] h-[60%] rounded-3xl overflow-hidden shadow-2xl border-4 border-border">
               <Image
                 src="/luxurious-hotel-lobby.jpg"
                 alt="Travel destination"

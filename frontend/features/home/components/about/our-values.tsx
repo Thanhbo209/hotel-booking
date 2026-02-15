@@ -37,7 +37,7 @@ export default function OurValues() {
     <div className="py-24 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-2 bg-card text-primary rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block border px-4 py-2 bg-card text-primary rounded-full text-sm font-semibold mb-6">
             Our Values
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold  mb-4">
