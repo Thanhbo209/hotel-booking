@@ -37,8 +37,9 @@ export function useHotelFilters(hotels: PublicHotel[]) {
       }
 
       if (filters.amenities.length) {
+        const hotelAmenities = hotel.amenities ?? [];
         const hasAll = filters.amenities.every((key) =>
-          hotel.amenities.includes(key),
+          hotelAmenities.includes(key),
         );
 
         if (!hasAll) return false;
@@ -54,7 +55,9 @@ export function useHotelFilters(hotels: PublicHotel[]) {
     Boolean(filters.city) ||
     Boolean(filters.searchQuery) ||
     filters.rating.length > 0 ||
-    filters.amenities.length > 0;
+    filters.amenities.length > 0 ||
+    filters.priceRange[0] !== INITIAL_FILTERS.priceRange[0] ||
+    filters.priceRange[1] !== INITIAL_FILTERS.priceRange[1];
 
   return {
     filters,

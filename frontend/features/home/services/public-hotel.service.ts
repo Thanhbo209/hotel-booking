@@ -1,4 +1,5 @@
 import { fetcher } from "@/lib/fetcher";
+import { AmenityKey } from "@/types/hotel-amenities.types";
 
 export interface PublicHotel {
   _id: string;
@@ -6,14 +7,7 @@ export interface PublicHotel {
   images?: string[]; // mảng ảnh
   minPrice?: number;
   city?: string;
-  amenities?: {
-    restaurant?: boolean;
-    swimmingPool?: boolean;
-    gym?: boolean;
-    spa?: boolean;
-    parking?: boolean;
-    bar?: boolean;
-  };
+  amenities?: AmenityKey[];
   address?: string;
   rating?: number;
 }
