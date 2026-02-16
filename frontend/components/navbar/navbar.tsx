@@ -103,9 +103,9 @@ export default function Navbar({ user }: { user?: UserType | null }) {
                     </span>
                   </div>
                   {user.role === "USER" && (
-                    <Link href="/bookings" className="dropdown-item">
+                    <Link href="/user/dashboard" className="dropdown-item">
                       <BookOpen className="w-4 h-4" />
-                      My Bookings
+                      Dashboard
                     </Link>
                   )}
 

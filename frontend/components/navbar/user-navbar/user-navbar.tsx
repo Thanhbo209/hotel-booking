@@ -16,7 +16,7 @@ import { useLogout } from "@/features/auth/hooks/useLogout";
 import { useHydrateAuth } from "@/features/auth/hooks/useHydrateAuth";
 import Link from "next/link";
 
-export default function OwnerNavbar() {
+export default function UserNavbar() {
   useHydrateAuth();
 
   const user = useAuthStore((s) => s.user);
@@ -62,8 +62,8 @@ export default function OwnerNavbar() {
 
               <div className="text-left hidden md:block">
                 <p className="text-sm font-medium">{user.fullName}</p>
-                {user.role === "OWNER" && (
-                  <p className="text-xs text-muted-foreground">Hotel Owner</p>
+                {user.role === "USER" && (
+                  <p className="text-xs text-muted-foreground">Customer</p>
                 )}
               </div>
             </Button>
