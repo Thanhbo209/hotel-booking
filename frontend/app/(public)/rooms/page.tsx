@@ -1,14 +1,14 @@
 "use client";
 
 import { useMemo } from "react";
-import { useRooms } from "@/features/home/components/rooms/hooks/useRooms";
-import { useRoomFilters } from "@/features/home/components/rooms/hooks/useRoomFilter";
+import { useRooms } from "@/features/main/components/rooms/hooks/useRooms";
+import { useRoomFilters } from "@/features/main/components/rooms/hooks/useRoomFilter";
 
-import RoomsLayout from "@/features/home/components/rooms/components/room-layout";
+import RoomsLayout from "@/features/main/components/rooms/components/room-layout";
 import {
   RoomsLoading,
   RoomsError,
-} from "@/features/home/components/rooms/components/room-state";
+} from "@/features/main/components/rooms/components/room-state";
 
 const RoomsPage = () => {
   const { rooms, isLoading, error } = useRooms();

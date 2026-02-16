@@ -1,6 +1,6 @@
 // app/(owner)/owner/layout.tsx
 import Sidebar from "@/components/sidebar/sidebar";
-import { OWNER_SIDEBAR_LINKS } from "@/components/sidebar/owner-datas/owner-links";
+import { OWNER_SIDEBAR_LINKS } from "@/components/sidebar/owner-constants/owner-links";
 import OwnerNavbar from "@/components/navbar/owner-navbar/owner-navbar";
 
 export default function OwnerLayout({

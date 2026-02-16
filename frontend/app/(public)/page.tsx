@@ -1,5 +1,5 @@
-import { Hero } from "@/features/home/components/home/hero";
-import { HotelList } from "@/features/home/components/home/hotel-list";
+import { Hero } from "@/features/main/components/home/hero";
+import { HotelList } from "@/features/main/components/home/hotel-list";
 
 const Home = () => {
   return (

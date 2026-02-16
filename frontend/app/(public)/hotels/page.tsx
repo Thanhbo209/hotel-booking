@@ -1,7 +1,7 @@
 "use client";
 
-import { usePublicHotels } from "@/features/home/hooks/usePublicHotels";
-import { useHotelFilters } from "@/features/home/components/hotels/hooks/useHotelFilters";
+import { usePublicHotels } from "@/features/main/hooks/usePublicHotels";
+import { useHotelFilters } from "@/features/main/components/hotels/hooks/useHotelFilters";
 import { FilterState } from "@/types/filter.types";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,9 +14,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Search, Filter, X, SlidersHorizontal } from "lucide-react";
-import { HotelCard } from "@/features/home/components/hotels/components/hotels-card";
-import { FilterContent } from "@/features/home/components/hotels/components/filter-content";
-import { PublicHotel } from "@/features/home/services/public-hotel.service";
+import { HotelCard } from "@/features/main/components/hotels/components/hotels-card";
+import { FilterContent } from "@/features/main/components/hotels/components/filter-content";
+import { PublicHotel } from "@/features/main/services/public-hotel.service";
 
 export default function HotelsPage() {
   const { hotels, loading, error } = usePublicHotels();
@@ -188,7 +188,7 @@ function FilterSidebar({
               )}
             </div>
           </CardHeader>
-          <CardContent className="pt-6">
+          <CardContent className="">
             <FilterContent
               filters={filters}
               setFilters={setFilters}

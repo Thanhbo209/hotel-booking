@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Filter, X } from "lucide-react";
-import { RoomCard } from "@/features/home/components/rooms/components/room-card";
-import { RoomFilters } from "@/features/home/components/rooms/components/room-filter";
+import { RoomCard } from "@/features/main/components/rooms/components/room-card";
+import { RoomFilters } from "@/features/main/components/rooms/components/room-filter";
 import { Room, RoomFilterState } from "@/types/room";
 
 interface Props {

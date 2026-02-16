@@ -23,6 +23,16 @@ import {
   Hotel,
 } from "@/types/hotel";
 import { useUpdateHotel } from "@/features/owner/hooks/useUpdateHotel";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { LOCATION_BY_REGION } from "@/features/main/components/home/data/home-data";
 
 interface Props {
   open: boolean;
@@ -271,13 +281,32 @@ export default function CreateHotelModal({
                   <Label htmlFor="city" className="text-base font-semibold">
                     City <span className="text-destructive">*</span>
                   </Label>
-                  <Input
-                    id="city"
-                    placeholder="e.g. New York"
+
+                  <Select
                     value={form.city}
-                    onChange={(e) => setForm({ ...form, city: e.target.value })}
-                    className="h-11 text-base"
-                  />
+                    onValueChange={(value) => setForm({ ...form, city: value })}
+                  >
+                    <SelectTrigger className="h-11 text-base">
+                      <SelectValue placeholder="Select a city" />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      {Object.entries(LOCATION_BY_REGION).map(
+                        ([region, cities]) => (
+                          <SelectGroup key={region}>
+                            <SelectLabel className="px-2 py-1 text-sm font-semibold text-muted-foreground">
+                              {region}
+                            </SelectLabel>
+                            {cities.map((city) => (
+                              <SelectItem key={city} value={city}>
+                                {city}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        ),
+                      )}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 {/* Description */}
