@@ -125,7 +125,7 @@ export function RoomCard({ room, checkInDate, checkOutDate }: RoomCardProps) {
               {room.name}
             </h3>
             <p className="text-sm text-muted-foreground">
-              {room.hotelId.name} as · {room.hotelId.city}
+              {room.hotelId.name} · {room.hotelId.city}
             </p>
             <div className="flex items-center gap-1.5 text-muted-foreground">
               <Users className="w-4 h-4" />

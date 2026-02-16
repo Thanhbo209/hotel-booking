@@ -12,39 +12,39 @@ import {
 export const USER_SIDEBAR_LINKS = [
   {
     label: "Dashboard",
-    path: "/owner/dashboard",
+    path: "/user/dashboard",
     icon: LayoutDashboard,
   },
   {
     label: "My Bookings",
-    path: "/owner/hotels",
+    path: "/user/hotels",
     icon: BookImageIcon,
   },
   {
     label: "Ratings",
-    path: "/owner/bookings",
+    path: "/user/bookings",
     icon: Star,
   },
   {
     label: "Refund",
-    path: "/owner/refund",
+    path: "/user/refund",
     icon: DollarSign,
   },
   {
     label: "Message",
-    path: "/owner/message",
+    path: "/user/message",
     icon: MessageSquare,
     position: "bottom" as const,
   },
   {
     label: "Help",
-    path: "/owner/help",
+    path: "/user/help",
     icon: HelpCircle,
     position: "bottom" as const,
   },
   {
     label: "Settings",
-    path: "/owner/settings",
+    path: "/user/settings",
     icon: Settings,
     position: "bottom" as const,
   },

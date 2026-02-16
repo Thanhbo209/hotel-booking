@@ -1,4 +1,3 @@
-// app/(owner)/owner/layout.tsx
 import Sidebar from "@/components/sidebar/sidebar";
 import { USER_SIDEBAR_LINKS } from "@/components/sidebar/user-constants/user-links";
 import UserNavbar from "@/components/navbar/user-navbar/user-navbar";
