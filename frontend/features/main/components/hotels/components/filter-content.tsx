@@ -1,5 +1,4 @@
 import { FilterState } from "@/types/filter.types";
-import { CITIES } from "@/features/home/components/hotels/constants/hotel-constants";
 import { AMENITIES } from "@/features/owner/components/amenities-checkbox";
 
 import { Label } from "@/components/ui/label";
@@ -17,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { MapPin, Star, Search } from "lucide-react";
+import { LOCATION_BY_REGION } from "@/features/main/components/home/data/home-data";
 
 interface FilterContentProps {
   filters: FilterState;
@@ -32,12 +32,12 @@ export function FilterContent({
   clearFilters,
 }: FilterContentProps) {
   return (
-    <div className="space-y-6 max-sm:p-6">
+    <div className="space-y-5 max-sm:p-6">
       {/* Search */}
-      <div className="space-y-2">
+      <div className="space-y-2 ">
         <Label className="flex items-center gap-2">
           <Search className="w-4 h-4 text-primary" />
-          Search
+          Search hotels
         </Label>
         <Input
           placeholder="Hotel name..."
@@ -73,10 +73,19 @@ export function FilterContent({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All locations</SelectItem>
-            {CITIES.map((city) => (
-              <SelectItem key={city} value={city}>
-                {city}
-              </SelectItem>
+
+            {Object.entries(LOCATION_BY_REGION).map(([region, cities]) => (
+              <div key={region}>
+                <div className="px-10 py-1 text-xs font-semibold text-muted-foreground">
+                  {region}
+                </div>
+
+                {cities.map((city) => (
+                  <SelectItem key={city} value={city}>
+                    {city}
+                  </SelectItem>
+                ))}
+              </div>
             ))}
           </SelectContent>
         </Select>

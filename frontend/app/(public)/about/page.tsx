@@ -1,7 +1,7 @@
-import AboutHero from "@/features/home/components/about/about-hero";
-import OurStory from "@/features/home/components/about/our-story";
-import OurValues from "@/features/home/components/about/our-values";
-import Statistics from "@/features/home/components/about/statistic";
+import AboutHero from "@/features/main/components/about/about-hero";
+import OurStory from "@/features/main/components/about/our-story";
+import OurValues from "@/features/main/components/about/our-values";
+import Statistics from "@/features/main/components/about/statistic";
 
 export default function AboutPage() {
   return (

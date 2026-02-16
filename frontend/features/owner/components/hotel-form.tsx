@@ -23,6 +23,14 @@ import {
   Hotel,
 } from "@/types/hotel";
 import { useUpdateHotel } from "@/features/owner/hooks/useUpdateHotel";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { LOCATION_BY_REGION } from "@/features/main/components/home/data/home-data";
 
 interface Props {
   open: boolean;
@@ -271,13 +279,34 @@ export default function CreateHotelModal({
                   <Label htmlFor="city" className="text-base font-semibold">
                     City <span className="text-destructive">*</span>
                   </Label>
-                  <Input
-                    id="city"
-                    placeholder="e.g. New York"
+
+                  <Select
                     value={form.city}
-                    onChange={(e) => setForm({ ...form, city: e.target.value })}
-                    className="h-11 text-base"
-                  />
+                    onValueChange={(value) => setForm({ ...form, city: value })}
+                  >
+                    <SelectTrigger className="h-11 text-base">
+                      <SelectValue placeholder="Select a city" />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      {Object.entries(LOCATION_BY_REGION).map(
+                        ([region, cities]) => (
+                          <div key={region}>
+                            {/* Region label */}
+                            <div className="px-2 py-1 text-sm font-semibold text-muted-foreground">
+                              {region}
+                            </div>
+
+                            {cities.map((city) => (
+                              <SelectItem key={city} value={city}>
+                                {city}
+                              </SelectItem>
+                            ))}
+                          </div>
+                        ),
+                      )}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 {/* Description */}

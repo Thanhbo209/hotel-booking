@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { PublicHotel } from "@/features/home/services/public-hotel.service";
+import { PublicHotel } from "@/features/main/services/public-hotel.service";
 import { FilterState, INITIAL_FILTERS } from "@/types/filter.types";
 
 export function useHotelFilters(hotels: PublicHotel[]) {

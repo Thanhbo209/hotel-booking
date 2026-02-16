@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { usePublicHotels } from "@/features/home/hooks/usePublicHotels";
+import { usePublicHotels } from "@/features/main/hooks/usePublicHotels";
 import { MapPin, Star } from "lucide-react";
 
 export const HotelList = () => {

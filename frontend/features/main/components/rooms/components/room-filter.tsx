@@ -4,7 +4,7 @@ import {
   ROOM_AMENITIES,
   SORT_OPTIONS,
   CAPACITY_OPTIONS,
-} from "@/features/home/components/rooms/constants/room.constants";
+} from "@/features/main/components/rooms/constants/room.constants";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";

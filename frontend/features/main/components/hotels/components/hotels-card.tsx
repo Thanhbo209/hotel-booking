@@ -1,9 +1,9 @@
-import { PublicHotel } from "@/features/home/services/public-hotel.service";
+import { PublicHotel } from "@/features/main/services/public-hotel.service";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { MapPin, Star } from "lucide-react";
+import { ArrowRight, MapPin, Star } from "lucide-react";
 import { AMENITIES } from "@/features/owner/components/amenities-checkbox";
 
 interface HotelCardProps {
@@ -84,7 +84,9 @@ export function HotelCard({ hotel }: HotelCardProps) {
             )}
           </div>
 
-          <Button className="shadow-md shadow-blue-600/20">Book</Button>
+          <Button variant={"outline"} className="shadow-md shadow-blue-600/20">
+            See Details <ArrowRight />
+          </Button>
         </div>
       </CardContent>
     </Card>
