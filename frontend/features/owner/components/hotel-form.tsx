@@ -26,7 +26,9 @@ import { useUpdateHotel } from "@/features/owner/hooks/useUpdateHotel";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -291,18 +293,16 @@ export default function CreateHotelModal({
                     <SelectContent>
                       {Object.entries(LOCATION_BY_REGION).map(
                         ([region, cities]) => (
-                          <div key={region}>
-                            {/* Region label */}
-                            <div className="px-2 py-1 text-sm font-semibold text-muted-foreground">
+                          <SelectGroup key={region}>
+                            <SelectLabel className="px-2 py-1 text-sm font-semibold text-muted-foreground">
                               {region}
-                            </div>
-
+                            </SelectLabel>
                             {cities.map((city) => (
                               <SelectItem key={city} value={city}>
                                 {city}
                               </SelectItem>
                             ))}
-                          </div>
+                          </SelectGroup>
                         ),
                       )}
                     </SelectContent>

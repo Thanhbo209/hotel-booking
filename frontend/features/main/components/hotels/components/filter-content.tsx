@@ -7,7 +7,9 @@ import { Separator } from "@/components/ui/separator";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -75,17 +77,16 @@ export function FilterContent({
             <SelectItem value="all">All locations</SelectItem>
 
             {Object.entries(LOCATION_BY_REGION).map(([region, cities]) => (
-              <div key={region}>
-                <div className="px-10 py-1 text-xs font-semibold text-muted-foreground">
+              <SelectGroup key={region}>
+                <SelectLabel className="px-2 py-1 text-xs font-semibold text-muted-foreground">
                   {region}
-                </div>
-
+                </SelectLabel>
                 {cities.map((city) => (
                   <SelectItem key={city} value={city}>
                     {city}
                   </SelectItem>
                 ))}
-              </div>
+              </SelectGroup>
             ))}
           </SelectContent>
         </Select>
