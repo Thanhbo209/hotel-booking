@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { Room, RoomFilterState } from "@/types/room";
+import { PublicRoom } from "@/types/hotel";
 
 const INITIAL_FILTERS: RoomFilterState = {
   capacity: null,
@@ -12,7 +13,7 @@ const INITIAL_FILTERS: RoomFilterState = {
   searchQuery: "",
 };
 
-export function useRoomFilters(rooms: Room[]) {
+export function useRoomFilters(rooms: PublicRoom[]) {
   const [filters, setFilters] = useState<RoomFilterState>(INITIAL_FILTERS);
 
   // Filter and sort rooms

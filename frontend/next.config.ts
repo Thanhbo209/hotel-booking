@@ -12,6 +12,15 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "res.cloudinary.com",
       },
+      {
+        protocol: "https",
+        hostname: "a0.muscache.com",
+      },
+
+      {
+        protocol: "https",
+        hostname: "cdn.hometogo.net",
+      },
     ],
   },
 };

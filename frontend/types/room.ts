@@ -57,3 +57,9 @@ export interface RoomFilterState {
   checkOutDate: string;
   searchQuery: string;
 }
+
+export interface BookingForm {
+  checkIn: string;
+  checkOut: string;
+  guests: number;
+}
