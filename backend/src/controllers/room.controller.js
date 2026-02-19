@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
 
@@ -47,6 +48,87 @@ export const getPublicRooms = async (req, res) => {
   } catch (error) {
     console.error("getPublicRooms error:", error);
     res.status(500).json({ message: "Get public rooms failed" });
+  }
+};
+
+export const getPublicRoomById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "Invalid room id",
+      });
+    }
+
+    const room = await Room.findById(id)
+      .populate("hotelId", "name address city")
+      .lean();
+
+    if (!room) {
+      return res.status(404).json({
+        message: "Room not found",
+      });
+    }
+
+    // (optional) chỉ cho room ACTIVE
+    if (room.status !== "ACTIVE") {
+      return res.status(404).json({
+        message: "Room not available",
+      });
+    }
+
+    return res.json(room);
+  } catch (error) {
+    console.error("getPublicRoomById error:", error);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+export const getRelatedRooms = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const limit = Math.min(10, parseInt(req.query.limit) || 3);
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid room id" });
+    }
+
+    // 1️⃣ lấy room hiện tại
+    const currentRoom = await Room.findById(id).lean();
+
+    if (!currentRoom) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+
+    // ✅ FIX: đảm bảo amenities là array
+    const amenitiesArray = Array.isArray(currentRoom.amenities)
+      ? currentRoom.amenities
+      : [];
+
+    const query = {
+      _id: { $ne: currentRoom._id },
+      status: "ACTIVE",
+      hotelId: currentRoom.hotelId,
+    };
+
+    // ✅ chỉ thêm $in khi có amenities
+    if (amenitiesArray.length > 0) {
+      query.amenities = { $in: amenitiesArray };
+    }
+
+    const relatedRooms = await Room.find(query)
+      .populate("hotelId", "name city address")
+      .sort({ pricePerNight: 1 })
+      .limit(limit)
+      .lean();
+
+    res.json({ rooms: relatedRooms });
+  } catch (error) {
+    console.error("getRelatedRooms error:", error);
+    res.status(500).json({ message: "Get related rooms failed" });
   }
 };
 

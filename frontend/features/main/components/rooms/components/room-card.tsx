@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 import {
   Users,
   Wifi,
@@ -180,9 +181,12 @@ export function RoomCard({ room, checkInDate, checkOutDate }: RoomCardProps) {
               </p>
             )}
           </div>
-          <Button size="lg" className="shadow-md shadow-primary/20">
-            Book Now
-          </Button>
+
+          <Link href={`/rooms/${room._id}`}>
+            <Button size="lg" className="shadow-md shadow-primary/20">
+              Book Now
+            </Button>
+          </Link>
         </div>
       </CardContent>
     </Card>
