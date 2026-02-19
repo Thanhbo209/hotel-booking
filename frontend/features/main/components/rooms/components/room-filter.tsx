@@ -185,22 +185,25 @@ export function RoomFilters({ filters, setFilters }: RoomFiltersProps) {
             <DollarSign size={20} className="w-4 h-4" />
             Price Range
           </span>
+
           <span className="text-sm font-semibold text-primary">
-            {filters.priceRange[1].toLocaleString("vi-VN")}đ
+            ${filters.priceRange[1].toLocaleString("en-US")}
           </span>
         </Label>
+
         <Slider
           value={[filters.priceRange[1]]}
           onValueChange={(value) =>
             setFilters({ ...filters, priceRange: [0, value[0]] })
           }
-          max={10000000}
-          step={100000}
+          max={10000}
+          step={100}
           className="py-4"
         />
+
         <div className="flex justify-between text-xs text-muted-foreground">
-          <span>0đ</span>
-          <span>10,000,000đ</span>
+          <span>$0</span>
+          <span>$10,000</span>
         </div>
       </div>
 

@@ -99,14 +99,14 @@ export function FilterContent({
         <Label className="flex justify-between">
           <span>Price range</span>
           <span className="font-semibold text-primary">
-            {filters.priceRange[1].toLocaleString("vi-VN")}đ
+            ${filters.priceRange[1].toLocaleString("en-US")}
           </span>
         </Label>
 
         <Slider
           value={[filters.priceRange[1]]}
-          max={10_000_000}
-          step={100_000}
+          max={10000}
+          step={100}
           onValueChange={([value]) =>
             setFilters((prev) => ({
               ...prev,
@@ -116,8 +116,8 @@ export function FilterContent({
         />
 
         <div className="flex justify-between text-xs text-muted-foreground">
-          <span>0đ</span>
-          <span>10,000,000đ</span>
+          <span>$0</span>
+          <span>$10,000</span>
         </div>
       </div>
 
